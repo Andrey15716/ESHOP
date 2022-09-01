@@ -28,7 +28,7 @@
         <div>
             <p>Download category</p>
             <a href="${contextPath}/category/download">
-                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;"></i>Download</button>
+                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
             </a>
         </div>
     </div>
@@ -46,7 +46,7 @@
         <div>
             <p>Download product</p>
             <a href="${contextPath}/product/download">
-                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;"></i>Download</button>
+                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
             </a>
         </div>
     </div>
@@ -57,7 +57,7 @@
         <div>
             <p>Download user</p>
             <a href="${contextPath}/user/download">
-                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;"></i>Download</button>
+                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
             </a>
         </div>
     </div>
@@ -75,7 +75,7 @@
         <div>
             <p>Download order</p>
             <a href="${contextPath}/order/download">
-                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;"></i>Download</button>
+                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
             </a>
         </div>
     </div>
