@@ -122,4 +122,9 @@ public class UserServiceImpl implements UserService {
         log.info("Profile page has been selected");
         return modelAndView;
     }
+
+    @Override
+    public Optional<User> findByLogin(String username) {
+        return Optional.ofNullable(userRepository.getUserByName(username));
+    }
 }

@@ -16,7 +16,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.example" level="debug" additivity="false">
+    <logger name="by.teachmeskills" level="debug" additivity="false">
         <appender-ref ref="FILE"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
