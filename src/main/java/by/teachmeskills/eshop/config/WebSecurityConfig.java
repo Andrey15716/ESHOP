@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_ADMIN;
-import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_USER;
 
 @EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -28,21 +27,22 @@ public class WebSecurityConfig {
                             try {
                                 authz
 
-                                        .antMatchers("/login/*")
+                                        .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/registration")
-                                        .permitAll()
-                                        .antMatchers("/cart/buy", "/login/profile")
+                                        .antMatchers("/profile/**", "/cart/**")
                                         .authenticated()
-                                        .antMatchers("/admin/*")
+                                        .antMatchers("/home/admin")
                                         .hasRole(ROLE_ADMIN)
                                         .and()
                                         .formLogin()
                                         .loginPage("/login")
                                         .usernameParameter("name")
                                         .passwordParameter("password")
-                                        .permitAll()
                                         .defaultSuccessUrl("/home")
+                                        .permitAll()
+                                        .and()
+                                        .rememberMe()
+                                        .alwaysRemember(true)
                                         .and()
                                         .logout()
                                         .invalidateHttpSession(true)
@@ -54,6 +54,7 @@ public class WebSecurityConfig {
                         }
                 );
         return http.build();
+
     }
 
     @Bean

@@ -40,17 +40,17 @@ public class AuthController {
         return new ModelAndView(SIGN_IN_PAGE.getPath());
     }
 
-    @PostMapping
-    public ModelAndView authenticate(@ModelAttribute(USER) @Valid User user,
-                                     BindingResult bindingResult, ModelAndView modelAndView) throws AuthorizationsExceptions, ServiceExceptions, RepositoryExceptions {
-        if (bindingResult.hasErrors()) {
-            fieldError(NAME, modelAndView, bindingResult);
-            fieldError(PASSWORD, modelAndView, bindingResult);
-            modelAndView.setViewName(START_PAGE.getPath());
-            return modelAndView;
-        }
-        return userService.authenticate(user);
-    }
+//    @PostMapping
+//    public ModelAndView authenticate(@ModelAttribute(USER) @Valid User user,
+//                                     BindingResult bindingResult, ModelAndView modelAndView) throws AuthorizationsExceptions, ServiceExceptions, RepositoryExceptions {
+//        if (bindingResult.hasErrors()) {
+//            fieldError(NAME, modelAndView, bindingResult);
+//            fieldError(PASSWORD, modelAndView, bindingResult);
+//            modelAndView.setViewName(START_PAGE.getPath());
+//            return modelAndView;
+//        }
+//        return userService.authenticate(user);
+//    }
 
     @GetMapping("/profile")
     public ModelAndView getProfileData(@ModelAttribute(USER) User user,
@@ -64,11 +64,11 @@ public class AuthController {
         return new User();
     }
 
-    private void fieldError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors(field)) {
-            modelAndView.addObject(field + ERROR,
-                    Objects.requireNonNull(bindingResult.getFieldError(field))
-                            .getDefaultMessage());
-        }
-    }
+//    private void fieldError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
+//        if (bindingResult.hasFieldErrors(field)) {
+//            modelAndView.addObject(field + ERROR,
+//                    Objects.requireNonNull(bindingResult.getFieldError(field))
+//                            .getDefaultMessage());
+//        }
+//    }
 }

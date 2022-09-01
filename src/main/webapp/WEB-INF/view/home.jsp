@@ -16,6 +16,35 @@
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <h2>Popular categories</h2>
+
+
+<div class="auth-info">
+    <div class="auth-status">
+        <sec:authorize access="isAuthenticated()">
+            <i class="fa-solid fa-user-check"></i>
+            <a>${pageContext.request.userPrincipal.name}</a>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+            <i class="fa-solid fa-user-xmark"></i>
+            <a>unathorised</a>
+        </sec:authorize>
+    </div>
+    <div class="auth-btn">
+        <sec:authorize access="!isAuthenticated()">
+            <a href="${contextPath}/user">
+                <i class="fa-solid fa-right-to-bracket fa-2x"></i>
+            </a>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <a href="${contextPath}/logout">
+                <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
+            </a>
+        </sec:authorize>
+    </div>
+</div>
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="${contextPath}/home">Online Shop</a>
@@ -27,11 +56,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>
             </ul>
         </div>
     </div>
 </nav>
+
 <div class="container-fluid">
     <c:if test="${not empty categories}">
         <div class="row">
@@ -47,5 +79,6 @@
         </div>
     </c:if>
 </div>
+
 </body>
 </html>
