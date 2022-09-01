@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User getUserByNameAndPassword(String name, String password) throws RepositoryExceptions;
 
+    User getUserByName(String name);
+
     void deleteUserById(int id);
 }

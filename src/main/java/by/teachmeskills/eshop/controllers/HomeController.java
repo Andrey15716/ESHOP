@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.USER;
+import static by.teachmeskills.eshop.utils.PagesPathEnum.DATA_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.START_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.CATEGORIES_PARAM;
 
@@ -33,5 +34,10 @@ public class HomeController {
         List<Category> categoriesList = categoryService.read();
         model.addAttribute(CATEGORIES_PARAM.getValue(), categoriesList);
         return new ModelAndView(START_PAGE.getPath(), model);
+    }
+
+    @GetMapping("/admin")
+    public ModelAndView getUploadPage() {
+        return new ModelAndView(DATA_PAGE.getPath());
     }
 }
