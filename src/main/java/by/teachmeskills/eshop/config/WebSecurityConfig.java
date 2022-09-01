@@ -26,10 +26,9 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authz) -> {
                             try {
                                 authz
-
                                         .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/profile/**", "/cart/**")
+                                        .antMatchers("/login/profile", "/cart/**")
                                         .authenticated()
                                         .antMatchers("/home/admin")
                                         .hasRole(ROLE_ADMIN)

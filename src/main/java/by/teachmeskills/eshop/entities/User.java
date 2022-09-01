@@ -39,7 +39,7 @@ public class User extends BaseEntity {
     @Column(name = "date_of_birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateBorn;
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id", nullable = false)

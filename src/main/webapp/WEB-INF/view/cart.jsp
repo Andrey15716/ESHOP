@@ -5,6 +5,23 @@
 <head>
     <title>Cart Page</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/style.css">
+    <script>
+        function orderCompletedMsg() {
+            window.confirm("Ваш заказ был оформлен!");
+        }
+
+        function productDeletedMsg() {
+            window.confirm("Товар был удален из корзины")
+        }
+
+        function productIncreaseMsg() {
+            window.confirm("Товар был добавлен!")
+        }
+
+        function productDecreaseMsg() {
+            window.confirm("Количество товара стало на 1 единицу меньше!")
+        }
+    </script>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -22,6 +39,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/home">Home</a></li>
             </ul>
         </div>
     </div>
@@ -37,6 +55,21 @@
                     <li class="card-title"><b>Name:</b> <a>${product.getName()}</a></li>
                     <li class="card-title"><b>Description:</b> <a>${product.getDescription()}</a></li>
                     <li class="card-title"><b>Price:</b> <a>${product.getPrice()}</a></li>
+                    <a href="${contextPath}/cart/delete?productId=${product.getId()}">
+                        <button class="buttonDelete" onclick="productDeletedMsg()" type="submit"><i
+                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить
+                        </button>
+                    </a>
+                    <a href="${contextPath}/cart/increase?productId=${product.getId()}">
+                        <button class="buttonIncrease" onclick="productIncreaseMsg()" type="submit"><i
+                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить
+                        </button>
+                    </a>
+                    <a href="${contextPath}/cart/decrease?productId=${product.getId()}">
+                        <button class="buttonDecrease" onclick="productDecreaseMsg()" type="submit"><i
+                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -49,7 +82,8 @@
     <div class="total-sum center">
         <b>Итого : ${cart.getTotalPrice()}</b>
         <a href="${contextPath}/cart/buy">
-            <button type="submit" class="btn btn-primary btn-sm">Купить</button>
+            <button type="submit" class="btn btn-primary btn-sm" onclick="orderCompletedMsg()">Купить
+            </button>
         </a>
     </div>
 </c:if>
