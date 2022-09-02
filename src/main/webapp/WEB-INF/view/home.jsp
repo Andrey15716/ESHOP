@@ -18,31 +18,31 @@
 <h2>Popular categories</h2>
 
 
-<div class="auth-info">
-    <div class="auth-status">
-        <sec:authorize access="isAuthenticated()">
-            <i class="fa-solid fa-user-check"></i>
-            <a>${pageContext.request.userPrincipal.name}</a>
-        </sec:authorize>
-        <sec:authorize access="!isAuthenticated()">
-            <i class="fa-solid fa-user-xmark"></i>
-            <a>unathorised</a>
-        </sec:authorize>
-    </div>
-    <div class="auth-btn">
-        <sec:authorize access="!isAuthenticated()">
-            <a href="${contextPath}/user">
-                <i class="fa-solid fa-right-to-bracket fa-2x"></i>
-            </a>
-        </sec:authorize>
+<%--<div class="auth-info">--%>
+<%--    <div class="auth-status">--%>
+<%--        <sec:authorize access="isAuthenticated()">--%>
+<%--            <i class="fa-solid fa-user-check"></i>--%>
+<%--            <a>${pageContext.request.userPrincipal.name}</a>--%>
+<%--        </sec:authorize>--%>
+<%--        <sec:authorize access="!isAuthenticated()">--%>
+<%--            <i class="fa-solid fa-user-xmark"></i>--%>
+<%--            <a>unathorised</a>--%>
+<%--        </sec:authorize>--%>
+<%--    </div>--%>
+<%--    <div class="auth-btn">--%>
+<%--        <sec:authorize access="!isAuthenticated()">--%>
+<%--            <a href="${contextPath}/user">--%>
+<%--                <i class="fa-solid fa-right-to-bracket fa-2x"></i>--%>
+<%--            </a>--%>
+<%--        </sec:authorize>--%>
 
-        <sec:authorize access="isAuthenticated()">
-            <a href="${contextPath}/logout">
-                <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-            </a>
-        </sec:authorize>
-    </div>
-</div>
+<%--        <sec:authorize access="isAuthenticated()">--%>
+<%--            <a href="${contextPath}/logout">--%>
+<%--                <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>--%>
+<%--            </a>--%>
+<%--        </sec:authorize>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -58,7 +58,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
-<%--                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>--%>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/home/admin">Admin</a></li>
             </ul>
         </div>
     </div>

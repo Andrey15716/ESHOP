@@ -16,30 +16,30 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <h2>${categoryName}</h2>
 
-<div class="auth-info">
-    <div class="auth-status">
-        <sec:authorize access="isAuthenticated()">
-            <i class="fa-solid fa-user-check"></i>
-            <a>${pageContext.request.userPrincipal.name}</a>
-        </sec:authorize>
-        <sec:authorize access="!isAuthenticated()">
-            <i class="fa-solid fa-user-xmark"></i>
-            <a>unathorised</a>
-        </sec:authorize>
-    </div>
-    <div class="auth-btn">
-        <sec:authorize access="!isAuthenticated()">
-            <a href="${contextPath}/user">
-                <i class="fa-solid fa-right-to-bracket fa-2x"></i>
-            </a>
-        </sec:authorize>
-        <sec:authorize access="isAuthenticated()">
-            <a href="${contextPath}/logout">
-                <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
-            </a>
-        </sec:authorize>
-    </div>
-</div>
+<%--<div class="auth-info">--%>
+<%--    <div class="auth-status">--%>
+<%--        <sec:authorize access="isAuthenticated()">--%>
+<%--            <i class="fa-solid fa-user-check"></i>--%>
+<%--            <a>${pageContext.request.userPrincipal.name}</a>--%>
+<%--        </sec:authorize>--%>
+<%--        <sec:authorize access="!isAuthenticated()">--%>
+<%--            <i class="fa-solid fa-user-xmark"></i>--%>
+<%--            <a>unathorised</a>--%>
+<%--        </sec:authorize>--%>
+<%--    </div>--%>
+<%--    <div class="auth-btn">--%>
+<%--        <sec:authorize access="!isAuthenticated()">--%>
+<%--            <a href="${contextPath}/login">--%>
+<%--                <i class="fa-solid fa-right-to-bracket fa-2x"></i>--%>
+<%--            </a>--%>
+<%--        </sec:authorize>--%>
+<%--        <sec:authorize access="isAuthenticated()">--%>
+<%--            <a href="${contextPath}/logout">--%>
+<%--                <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>--%>
+<%--            </a>--%>
+<%--        </sec:authorize>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
 <div class="dropdown">
     <select onchange="location=value" id="pageSize" name="pageSize">

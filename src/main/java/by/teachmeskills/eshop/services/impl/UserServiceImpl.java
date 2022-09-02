@@ -18,6 +18,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,15 +47,18 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CategoryService categoryService;
     private final OrderRepository orderRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, CategoryService categoryService, OrderRepository orderRepository) {
+    public UserServiceImpl(UserRepository userRepository, CategoryService categoryService, OrderRepository orderRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.categoryService = categoryService;
         this.orderRepository = orderRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User create(User entity) {
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return userRepository.save(entity);
     }
 
@@ -72,27 +77,27 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteUserById(id);
     }
 
-    @Override
-    public ModelAndView authenticate(User user) throws ServiceExceptions, RepositoryExceptions, AuthorizationsExceptions {
-        ModelAndView modelAndView = new ModelAndView();
-        if (Optional.ofNullable(user).isPresent()
-                && Optional.ofNullable(user.getName()).isPresent()
-                && Optional.ofNullable(user.getPassword()).isPresent()) {
-            User loggedUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
-            if (Optional.ofNullable(loggedUser).isPresent()) {
-                ModelMap modelMap = new ModelMap();
-                List<Category> categoriesList = categoryService.read();
-                modelMap.addAttribute(CATEGORIES_PARAM.getValue(), categoriesList);
-                modelAndView.setViewName(START_PAGE.getPath());
-                modelAndView.addAllObjects(modelMap);
-                log.info("User is authenticated!");
-            } else {
-                log.info("User is not found!");
-                throw new AuthorizationsExceptions("User is not authorised!");
-            }
-        }
-        return modelAndView;
-    }
+//    @Override
+//    public ModelAndView authenticate(User user) throws ServiceExceptions, RepositoryExceptions, AuthorizationsExceptions {
+//        ModelAndView modelAndView = new ModelAndView();
+//        if (Optional.ofNullable(user).isPresent()
+//                && Optional.ofNullable(user.getName()).isPresent()
+//                && Optional.ofNullable(user.getPassword()).isPresent()) {
+//            User loggedUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
+//            if (Optional.ofNullable(loggedUser).isPresent()) {
+//                ModelMap modelMap = new ModelMap();
+//                List<Category> categoriesList = categoryService.read();
+//                modelMap.addAttribute(CATEGORIES_PARAM.getValue(), categoriesList);
+//                modelAndView.setViewName(START_PAGE.getPath());
+//                modelAndView.addAllObjects(modelMap);
+//                log.info("User is authenticated!");
+//            } else {
+//                log.info("User is not found!");
+//                throw new AuthorizationsExceptions("User is not authorised!");
+//            }
+//        }
+//        return modelAndView;
+//    }
 
     @Override
     public ModelAndView addNewUser(User user) throws ServiceExceptions, RepositoryExceptions {
@@ -109,12 +114,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ModelAndView getProfileAccount(User user, int pageNumber, int pageSize) throws RepositoryExceptions {
+        user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ModelAndView modelAndView = new ModelAndView();
         ModelMap modelMap = new ModelMap();
         User loggedInUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
         modelMap.addAttribute(LOGGED_IN_USER_PARAM.getValue(), loggedInUser);
         Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by("id").descending());
-        Page<Order> userOrders = orderRepository.getOrdersByUserId(loggedInUser.getId(), paging);
+        Page<Order> userOrders = orderRepository.getOrdersByUserId(user.getId(), paging);
         modelMap.addAttribute(NUMBER_OF_PAGES.getValue(), userOrders.getTotalPages());
         modelMap.addAttribute(USER_ORDERS.getValue(), userOrders.getContent());
         modelMap.addAttribute(PAGE_SIZE.getValue(), pageSize);

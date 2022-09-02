@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public interface UserService extends BaseServices<User> {
-    ModelAndView authenticate(User user) throws ServiceExceptions, RepositoryExceptions, AuthorizationsExceptions;
+//    ModelAndView authenticate(User user) throws ServiceExceptions, RepositoryExceptions, AuthorizationsExceptions;
 
     ModelAndView addNewUser(User user) throws ServiceExceptions, RepositoryExceptions;
 
