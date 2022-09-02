@@ -3,10 +3,14 @@ package by.teachmeskills.eshop.services.impl;
 import by.teachmeskills.eshop.dto.SearchParamsDto;
 import by.teachmeskills.eshop.entities.Product;
 import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
-import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import by.teachmeskills.eshop.repositories.ProductRepository;
 import by.teachmeskills.eshop.repositories.ProductSearchSpecification;
 import by.teachmeskills.eshop.services.ProductService;
+import by.teachmeskills.eshop.utils.Assertions;
+import by.teachmeskills.eshop.utils.CsvParser;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.InputStream;
+import java.io.Writer;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product create(Product entity) throws ServiceExceptions, RepositoryExceptions {
+    public Product create(Product entity) {
         return productRepository.save(entity);
     }
 
@@ -60,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProductsByCategoryId(int categoryId, int pageNumber, int pageSize) throws RepositoryExceptions {
+    public List<Product> getAllProductsByCategoryId(int categoryId, int pageNumber, int pageSize) {
         Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by("name").ascending());
         Page<Product> products = productRepository.findAllByCategoryId(categoryId, paging);
         log.info("Products has been found");
@@ -68,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ModelAndView getProductsBySearchRequest(SearchParamsDto searchParamsDto, int pageNumber, int pageSize) throws ServiceExceptions, RepositoryExceptions {
+    public ModelAndView getProductsBySearchRequest(SearchParamsDto searchParamsDto, int pageNumber, int pageSize) {
         ModelMap modelMap = new ModelMap();
         ProductSearchSpecification productSearchSpecification = new ProductSearchSpecification(searchParamsDto);
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name"));
@@ -94,5 +101,28 @@ public class ProductServiceImpl implements ProductService {
             log.info("User got product by id - " + id);
         }
         return new ModelAndView(PRODUCT_PAGE.getPath(), modelMap);
+    }
+
+    @Override
+    public void downloadCsvFile(Writer writer) {
+        List<Product> products = productRepository.findAll();
+        try {
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
+                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                    .build();
+            beanToCsv.write(products);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Product> saveProductsFromCsvFile(InputStream inputStream) {
+        Assertions.assertNonNull(inputStream, "CSV parser not provided");
+        List<Product> productsParserCsv = CsvParser.productsParserCsv(inputStream);
+        if (Optional.ofNullable(productsParserCsv).isPresent()) {
+            productRepository.saveAll(productsParserCsv);
+        }
+        return Collections.emptyList();
     }
 }

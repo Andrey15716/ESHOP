@@ -10,6 +10,9 @@ import by.teachmeskills.eshop.repositories.OrderRepository;
 import by.teachmeskills.eshop.repositories.UserRepository;
 import by.teachmeskills.eshop.services.CategoryService;
 import by.teachmeskills.eshop.services.UserService;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User entity) throws ServiceExceptions, RepositoryExceptions {
+    public User create(User entity) {
         return userRepository.save(entity);
     }
 
@@ -68,27 +72,27 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteUserById(id);
     }
 
-//    @Override
-//    public ModelAndView authenticate(User user) throws ServiceExceptions, RepositoryExceptions, AuthorizationsExceptions {
-//        ModelAndView modelAndView = new ModelAndView();
-//        if (Optional.ofNullable(user).isPresent()
-//                && Optional.ofNullable(user.getName()).isPresent()
-//                && Optional.ofNullable(user.getPassword()).isPresent()) {
-//            User loggedUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
-//            if (Optional.ofNullable(loggedUser).isPresent()) {
-//                ModelMap modelMap = new ModelMap();
-//                List<Category> categoriesList = categoryService.read();
-//                modelMap.addAttribute(CATEGORIES_PARAM.getValue(), categoriesList);
-//                modelAndView.setViewName(START_PAGE.getPath());
-//                modelAndView.addAllObjects(modelMap);
-//                log.info("User is authenticated!");
-//            } else {
-//                log.info("User is not found!");
-//                throw new AuthorizationsExceptions("User is not authorised!");
-//            }
-//        }
-//        return modelAndView;
-//    }
+    @Override
+    public ModelAndView authenticate(User user) throws ServiceExceptions, RepositoryExceptions, AuthorizationsExceptions {
+        ModelAndView modelAndView = new ModelAndView();
+        if (Optional.ofNullable(user).isPresent()
+                && Optional.ofNullable(user.getName()).isPresent()
+                && Optional.ofNullable(user.getPassword()).isPresent()) {
+            User loggedUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
+            if (Optional.ofNullable(loggedUser).isPresent()) {
+                ModelMap modelMap = new ModelMap();
+                List<Category> categoriesList = categoryService.read();
+                modelMap.addAttribute(CATEGORIES_PARAM.getValue(), categoriesList);
+                modelAndView.setViewName(START_PAGE.getPath());
+                modelAndView.addAllObjects(modelMap);
+                log.info("User is authenticated!");
+            } else {
+                log.info("User is not found!");
+                throw new AuthorizationsExceptions("User is not authorised!");
+            }
+        }
+        return modelAndView;
+    }
 
     @Override
     public ModelAndView addNewUser(User user) throws ServiceExceptions, RepositoryExceptions {
@@ -104,7 +108,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ModelAndView getProfileAccount(User user, int pageNumber, int pageSize) throws ServiceExceptions, RepositoryExceptions {
+    public ModelAndView getProfileAccount(User user, int pageNumber, int pageSize) throws RepositoryExceptions {
         ModelAndView modelAndView = new ModelAndView();
         ModelMap modelMap = new ModelMap();
         User loggedInUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
@@ -126,5 +130,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByLogin(String name) {
         return userRepository.getUserByName(name);
+    }
+
+    @Override
+    public void downloadOrderCsvFile(Writer writer, int userId) throws RepositoryExceptions {
+        List<Order> order = orderRepository.getOrdersByUserId(userId);
+        try {
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
+                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                    .build();
+            beanToCsv.write(order);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 }

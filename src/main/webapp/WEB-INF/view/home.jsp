@@ -58,7 +58,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>
+<%--                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>--%>
             </ul>
         </div>
     </div>

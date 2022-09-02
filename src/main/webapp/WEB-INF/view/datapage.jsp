@@ -17,7 +17,6 @@
 <div>
     <h2>Category Data pages control</h2>
     <div>
-        <label>Category Data</label>
         <div>
             <form method="POST" enctype="multipart/form-data" action="/category/upload">
                 <p>Upload category:</p>
@@ -35,7 +34,6 @@
 
     <h2>Product Data pages control</h2>
     <div>
-        <label>Product Data</label>
         <div>
             <form method="POST" enctype="multipart/form-data" action="/product/upload">
                 <p>Upload product:</p>
@@ -51,31 +49,13 @@
         </div>
     </div>
 
-    <h2>User Data pages control</h2>
-    <div>
-        <label>User Data</label>
-        <div>
-            <p>Download user</p>
-            <a href="${contextPath}/user/download">
-                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
-            </a>
-        </div>
-    </div>
-
     <h2>Order Data pages control</h2>
     <div>
-        <label>Order Data</label>
+        <label>Order download panel:</label>
         <div>
-            <form method="POST" enctype="multipart/form-data" action="/order/upload">
-                <p>Upload order:</p>
-                <input type="file" name="file"><br/>
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 5px 0;">Upload</button>
-            </form>
-        </div>
-        <div>
-            <p>Download order</p>
-            <a href="${contextPath}/order/download">
-                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
+            <a style="text-decoration: none"
+               href="${contextPath}/home/order/download?userId=${user.getId()}">
+                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
             </a>
         </div>
     </div>
