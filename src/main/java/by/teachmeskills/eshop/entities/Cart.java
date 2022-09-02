@@ -28,21 +28,22 @@ public class Cart extends BaseEntity {
         totalPrice += product.getPrice();
     }
 
-    public void deleteProduct(Product product) {
-        products.remove(product.getPrice(), product);
-        totalPrice -= product.getPrice();
-    }
-
-    public void decreaseQuantity(Product product) {
-        int countProducts = products.size();
-        if (countProducts > 1) {
-            countProducts = countProducts - 1;
-            products.put(countProducts, product);
-        } else {
-            products.remove(product.getId(), product);
-        }
-        totalPrice -= product.getPrice();
-    }
+//    public void deleteProduct(Product product) {
+//        int price = product.getPrice();
+//        products.remove(price, product);
+//        totalPrice = totalPrice - price;
+//    }
+//
+//    public void decreaseQuantity(Product product) {
+//        int countProducts = products.size();
+//        if (countProducts > 1) {
+//            countProducts = countProducts - 1;
+//            products.put(countProducts, product);
+//        } else {
+//            products.remove(product.getId(), product);
+//        }
+//        totalPrice -= product.getPrice();
+//    }
 
     public void clearCart() {
         products.clear();

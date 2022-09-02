@@ -52,6 +52,7 @@ public class AuthController {
 //        return userService.authenticate(user);
 //    }
 
+
     @GetMapping("/profile")
     public ModelAndView getProfileData(@ModelAttribute(USER) User user,
                                        @RequestParam(defaultValue = "0") int pageNumber,
@@ -64,11 +65,11 @@ public class AuthController {
         return new User();
     }
 
-//    private void fieldError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
-//        if (bindingResult.hasFieldErrors(field)) {
-//            modelAndView.addObject(field + ERROR,
-//                    Objects.requireNonNull(bindingResult.getFieldError(field))
-//                            .getDefaultMessage());
-//        }
-//    }
+    private void fieldError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors(field)) {
+            modelAndView.addObject(field + ERROR,
+                    Objects.requireNonNull(bindingResult.getFieldError(field))
+                            .getDefaultMessage());
+        }
+    }
 }

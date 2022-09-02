@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_ADMIN;
+import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_USER;
 
 @EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -26,18 +27,19 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authz) -> {
                             try {
                                 authz
+
                                         .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/login/profile", "/cart/**")
+                                        .antMatchers("/profile/**")
                                         .authenticated()
-                                        .antMatchers("/home/admin")
-                                        .hasRole(ROLE_ADMIN)
+                                        .antMatchers("/cart/**")
+                                        .authenticated()
                                         .and()
                                         .formLogin()
                                         .loginPage("/login")
                                         .usernameParameter("name")
                                         .passwordParameter("password")
-                                        .defaultSuccessUrl("/home")
+                                        .defaultSuccessUrl("/home").failureUrl("/login?error")
                                         .permitAll()
                                         .and()
                                         .rememberMe()
@@ -53,7 +55,6 @@ public class WebSecurityConfig {
                         }
                 );
         return http.build();
-
     }
 
     @Bean

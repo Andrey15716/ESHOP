@@ -35,6 +35,16 @@ public class CartService {
         this.userRepository = userRepository;
     }
 
+    public ModelAndView getCartData(Cart cart) {
+//        if (Optional.ofNullable(user.getLogin()).isPresent()
+//                && Optional.ofNullable(user.getPassword()).isPresent()
+//                && Optional.ofNullable(user.getEmail()).isPresent()) {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute(SHOPPING_CART_PARAM.getValue(), cart.getProducts());
+        modelMap.addAttribute(PRICE_ORDER_PARAM.getValue(), cart.getTotalPrice());
+        return new ModelAndView(CART_PAGE.getPath(), modelMap);
+    }
+
     public ModelAndView addProductToCart(int productId, Cart shopCart) throws RepositoryExceptions {
         ModelMap modelParams = new ModelMap();
         Product product = productRepository.getProductById(productId);
@@ -65,29 +75,29 @@ public class CartService {
         return new ModelAndView(ORDER_PAGE.getPath(), modelMap);
     }
 
-    public ModelAndView deleteProductFromCart(int productId, Cart shopCart) throws RepositoryExceptions {
-        ModelMap modelMap = new ModelMap();
-        Product product = productRepository.getProductById(productId);
-        shopCart.deleteProduct(product);
-        modelMap.addAttribute(SHOPPING_CART, shopCart);
-        return new ModelAndView(CART_PAGE.getPath(), modelMap);
-    }
+//    public ModelAndView deleteProductFromCart(int productId, Cart shopCart) throws RepositoryExceptions {
+//        ModelMap modelMap = new ModelMap();
+//        Product product = productRepository.getProductById(productId);
+//        shopCart.deleteProduct(product);
+//        modelMap.addAttribute(SHOPPING_CART, shopCart);
+//        return new ModelAndView(ORDER_PAGE.getPath(), modelMap);
+//    }
 
-    public ModelAndView increaseProductQuantity(int productId, Cart shopCart) throws RepositoryExceptions {
-        ModelMap modelParams = new ModelMap();
-        Product product = productRepository.getProductById(productId);
-        shopCart.addProduct(product);
-        modelParams.addAttribute(PRODUCT_PARAM.getValue(), product);
-        modelParams.addAttribute(SHOPPING_CART, shopCart);
-        return new ModelAndView(CART_PAGE.getPath(), modelParams);
-    }
-
-    public ModelAndView decreaseProductQuantity(int productId, Cart shopCart) throws RepositoryExceptions {
-        ModelMap modelParams = new ModelMap();
-        Product product = productRepository.getProductById(productId);
-        shopCart.decreaseQuantity(product);
-        modelParams.addAttribute(PRODUCT_PARAM.getValue(), product);
-        modelParams.addAttribute(SHOPPING_CART, shopCart);
-        return new ModelAndView(CART_PAGE.getPath(), modelParams);
-    }
+//    public ModelAndView increaseProductQuantity(int productId, Cart shopCart) throws RepositoryExceptions {
+//        ModelMap modelParams = new ModelMap();
+//        Product product = productRepository.getProductById(productId);
+//        shopCart.addProduct(product);
+//        modelParams.addAttribute(PRODUCT_PARAM.getValue(), product);
+//        modelParams.addAttribute(SHOPPING_CART, shopCart);
+//        return new ModelAndView(CART_PAGE.getPath(), modelParams);
+//    }
+//
+//    public ModelAndView decreaseProductQuantity(int productId, Cart shopCart) throws RepositoryExceptions {
+//        ModelMap modelParams = new ModelMap();
+//        Product product = productRepository.getProductById(productId);
+//        shopCart.decreaseQuantity(product);
+//        modelParams.addAttribute(PRODUCT_PARAM.getValue(), product);
+//        modelParams.addAttribute(SHOPPING_CART, shopCart);
+//        return new ModelAndView(CART_PAGE.getPath(), modelParams);
+//    }
 }

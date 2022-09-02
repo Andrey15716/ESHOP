@@ -6,6 +6,9 @@ import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
 import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
 import java.util.List;
 
 public interface ProductService extends BaseServices<Product> {
@@ -14,4 +17,8 @@ public interface ProductService extends BaseServices<Product> {
     ModelAndView getProductsBySearchRequest(SearchParamsDto searchParamsDto, int pageNumber, int pageSize) throws ServiceExceptions, RepositoryExceptions;
 
     ModelAndView getProductById(int id) throws ServiceExceptions, RepositoryExceptions;
+
+    void downloadCsvFile(Writer writer) throws RepositoryExceptions, ServiceExceptions;
+
+    List<Product> saveProductsFromCsvFile(InputStream inputStream) throws IOException;
 }

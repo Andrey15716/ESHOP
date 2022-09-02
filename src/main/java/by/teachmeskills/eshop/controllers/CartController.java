@@ -27,6 +27,11 @@ public class CartController {
         this.cartService = cartService;
     }
 
+    @GetMapping
+    public ModelAndView openCartPage(@ModelAttribute(SHOPPING_CART) Cart cart) {
+        return cartService.getCartData(cart);
+    }
+
     @GetMapping("/add")
     public ModelAndView addProductToCart(@RequestParam(PRODUCT_ID_PARAM) int productId,
                                          @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
@@ -39,23 +44,23 @@ public class CartController {
         return cartService.buyProduct(shopCart, user);
     }
 
-    @GetMapping("/delete")
-    public ModelAndView deleteProduct(@RequestParam(PRODUCT_ID_PARAM) int productId,
-                                      @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
-        return cartService.deleteProductFromCart(productId, shopCart);
-    }
+//    @GetMapping("/delete")
+//    public ModelAndView deleteProduct(@RequestParam(PRODUCT_ID_PARAM) int productId,
+//                                      @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
+//        return cartService.deleteProductFromCart(productId, shopCart);
+//    }
 
-    @GetMapping("/increase")
-    public ModelAndView increaseProduct(@RequestParam(PRODUCT_ID_PARAM) int productId,
-                                        @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
-        return cartService.increaseProductQuantity(productId, shopCart);
-    }
-
-    @GetMapping("/decrease")
-    public ModelAndView decreaseProduct(@RequestParam(PRODUCT_ID_PARAM) int productId,
-                                        @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
-        return cartService.decreaseProductQuantity(productId, shopCart);
-    }
+//    @GetMapping("/increase")
+//    public ModelAndView increaseProduct(@RequestParam(PRODUCT_ID_PARAM) int productId,
+//                                        @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
+//        return cartService.increaseProductQuantity(productId, shopCart);
+//    }
+//
+//    @GetMapping("/decrease")
+//    public ModelAndView decreaseProduct(@RequestParam(PRODUCT_ID_PARAM) int productId,
+//                                        @ModelAttribute(SHOPPING_CART) Cart shopCart) throws RepositoryExceptions {
+//        return cartService.decreaseProductQuantity(productId, shopCart);
+//    }
 
     @ModelAttribute(SHOPPING_CART)
     public Cart shoppingCart() {

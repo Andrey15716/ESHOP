@@ -55,21 +55,23 @@
                     <li class="card-title"><b>Name:</b> <a>${product.getName()}</a></li>
                     <li class="card-title"><b>Description:</b> <a>${product.getDescription()}</a></li>
                     <li class="card-title"><b>Price:</b> <a>${product.getPrice()}</a></li>
-                    <a href="${contextPath}/cart/delete?productId=${product.getId()}">
-                        <button class="buttonDelete" onclick="productDeletedMsg()" type="submit"><i
-                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить
-                        </button>
-                    </a>
-                    <a href="${contextPath}/cart/increase?productId=${product.getId()}">
-                        <button class="buttonIncrease" onclick="productIncreaseMsg()" type="submit"><i
-                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить
-                        </button>
-                    </a>
-                    <a href="${contextPath}/cart/decrease?productId=${product.getId()}">
-                        <button class="buttonDecrease" onclick="productDecreaseMsg()" type="submit"><i
-                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить
-                        </button>
-                    </a>
+
+
+                        <%--                    <a href="${contextPath}/cart/delete?productId=${product.getId()}">--%>
+                        <%--                        <button class="buttonDelete" onclick="productDeletedMsg()" type="submit"><i--%>
+                        <%--                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Удалить--%>
+                        <%--                        </button>--%>
+                        <%--                    </a>--%>
+                        <%--                    <a href="${contextPath}/cart/increase?productId=${product.getId()}">--%>
+                        <%--                        <button class="buttonIncrease" onclick="productIncreaseMsg()" type="submit"><i--%>
+                        <%--                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Добавить--%>
+                        <%--                        </button>--%>
+                        <%--                    </a>--%>
+                        <%--                    <a href="${contextPath}/cart/decrease?productId=${product.getId()}">--%>
+                        <%--                        <button class="buttonDecrease" onclick="productDecreaseMsg()" type="submit"><i--%>
+                        <%--                                class="fa fa-minus-square fa-lg" style="padding-right: 5px"></i>Уменьшить--%>
+                        <%--                        </button>--%>
+                        <%--                    </a>--%>
                 </div>
             </div>
         </div>

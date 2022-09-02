@@ -8,6 +8,7 @@ public interface EshopConstants {
     String NAME = "name";
     String PASSWORD = "password";
     String ERROR = "error";
+    String FILE = "file";
     String ID = "id";
     String ROLE_ADMIN = "admin";
     String ROLE_USER = "user";

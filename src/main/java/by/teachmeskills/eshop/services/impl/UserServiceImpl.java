@@ -10,15 +10,21 @@ import by.teachmeskills.eshop.repositories.OrderRepository;
 import by.teachmeskills.eshop.repositories.UserRepository;
 import by.teachmeskills.eshop.services.CategoryService;
 import by.teachmeskills.eshop.services.UserService;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,15 +47,18 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CategoryService categoryService;
     private final OrderRepository orderRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, CategoryService categoryService, OrderRepository orderRepository) {
+    public UserServiceImpl(UserRepository userRepository, CategoryService categoryService, OrderRepository orderRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.categoryService = categoryService;
         this.orderRepository = orderRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User create(User entity) throws ServiceExceptions, RepositoryExceptions {
+    public User create(User entity) {
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return userRepository.save(entity);
     }
 
@@ -104,13 +113,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ModelAndView getProfileAccount(User user, int pageNumber, int pageSize) throws ServiceExceptions, RepositoryExceptions {
+    public ModelAndView getProfileAccount(User user, int pageNumber, int pageSize) throws RepositoryExceptions {
+        user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ModelAndView modelAndView = new ModelAndView();
         ModelMap modelMap = new ModelMap();
         User loggedInUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
         modelMap.addAttribute(LOGGED_IN_USER_PARAM.getValue(), loggedInUser);
         Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by("id").descending());
-        Page<Order> userOrders = orderRepository.getOrdersByUserId(loggedInUser.getId(), paging);
+        Page<Order> userOrders = orderRepository.getOrdersByUserId(user.getId(), paging);
         modelMap.addAttribute(NUMBER_OF_PAGES.getValue(), userOrders.getTotalPages());
         modelMap.addAttribute(USER_ORDERS.getValue(), userOrders.getContent());
         modelMap.addAttribute(PAGE_SIZE.getValue(), pageSize);
@@ -126,5 +136,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByLogin(String name) {
         return userRepository.getUserByName(name);
+    }
+
+    @Override
+    public void downloadOrderCsvFile(Writer writer, int userId) throws RepositoryExceptions {
+        List<Order> order = orderRepository.getOrdersByUserId(userId);
+        try {
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
+                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                    .build();
+            beanToCsv.write(order);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 }
