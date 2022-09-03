@@ -16,31 +16,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <h2>${categoryName}</h2>
 
-<%--<div class="auth-info">--%>
-<%--    <div class="auth-status">--%>
-<%--        <sec:authorize access="isAuthenticated()">--%>
-<%--            <i class="fa-solid fa-user-check"></i>--%>
-<%--            <a>${pageContext.request.userPrincipal.name}</a>--%>
-<%--        </sec:authorize>--%>
-<%--        <sec:authorize access="!isAuthenticated()">--%>
-<%--            <i class="fa-solid fa-user-xmark"></i>--%>
-<%--            <a>unathorised</a>--%>
-<%--        </sec:authorize>--%>
-<%--    </div>--%>
-<%--    <div class="auth-btn">--%>
-<%--        <sec:authorize access="!isAuthenticated()">--%>
-<%--            <a href="${contextPath}/login">--%>
-<%--                <i class="fa-solid fa-right-to-bracket fa-2x"></i>--%>
-<%--            </a>--%>
-<%--        </sec:authorize>--%>
-<%--        <sec:authorize access="isAuthenticated()">--%>
-<%--            <a href="${contextPath}/logout">--%>
-<%--                <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>--%>
-<%--            </a>--%>
-<%--        </sec:authorize>--%>
-<%--    </div>--%>
-<%--</div>--%>
-
 <div class="dropdown">
     <select onchange="location=value" id="pageSize" name="pageSize">
         <option>Выбрать количество продуктов на странице</option>
@@ -64,7 +39,6 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
-<%--                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>--%>
             </ul>
         </div>
     </div>
@@ -97,19 +71,23 @@
                     </c:if>
                     <c:if test="${not isFirst}">
                         <li class="page-item">
-                            <a class="page-link" href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber-1}&pageSize=${pageSize}" tabindex="-1">Предыдущая</a></li>
+                            <a class="page-link"
+                               href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
+                               tabindex="-1">Предыдущая</a></li>
                     </c:if>
                     <c:forEach begin="0" end="${numberOfPages-1}" var="pageNumber">
                         <li class="page-item"><a class="page-link active"
                                                  href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a>
-                        </li><span class="sr-only">(current)</span></span>
+                        </li>
+                        <span class="sr-only">(current)</span></span>
                     </c:forEach>
                     <li class="page-item"><c:if test="${isLast}">
                     <li class="page-item disabled"><a class="page-link">Следующая</a></li>
-                        </c:if>
-                        <c:if test="${not isLast}">
-                    <li class="page-item"><a class="page-link" href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber+1}&pageSize=${pageSize}">Следующая</a>
-                    </li>
+                    </c:if>
+                    <c:if test="${not isLast}">
+                        <li class="page-item"><a class="page-link"
+                                                 href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber+1}&pageSize=${pageSize}">Следующая</a>
+                        </li>
                     </c:if>
                 </ul>
             </nav>

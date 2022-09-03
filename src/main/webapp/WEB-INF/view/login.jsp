@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-primary" style="width: 90px; margin: 5px 0;">Login</button>
         </form>
         <a href="${contextPath}/registration">
-            <button class="btn btn-primary" style="width: 90px; margin: 5px 0;" id="registerRedirect" type="submit">
+            <button class="btn btn-primary" style="width: 110px; margin: 5px 0;" id="registerRedirect" type="submit">
                 Registration
             </button>
         </a>

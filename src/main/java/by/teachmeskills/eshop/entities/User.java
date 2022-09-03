@@ -41,4 +41,7 @@ public class User extends BaseEntity {
     private LocalDate dateBorn;
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 }
