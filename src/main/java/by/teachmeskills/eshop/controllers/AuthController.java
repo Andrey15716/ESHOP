@@ -7,14 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-
-import static by.teachmeskills.eshop.utils.EshopConstants.ATTACHMENT_FILE_NAME_ORDER_CSV;
-import static by.teachmeskills.eshop.utils.EshopConstants.CONTENT_DISPOSITION;
-import static by.teachmeskills.eshop.utils.EshopConstants.TEXT_CSV;
-import static by.teachmeskills.eshop.utils.EshopConstants.UTF8;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.SIGN_IN_PAGE;
 
 @RestController

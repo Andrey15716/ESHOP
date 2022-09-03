@@ -32,46 +32,46 @@
         </div>
     </c:forEach>
 
-    <div class="pages">
-        <c:if test="${not empty numberOfPages}">
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    <c:if test="${isFirst}">
-                        <li class="page-item disabled">
-                            <a class="page-link" tabindex="-1">Previous</a>
-                        </li>
-                    </c:if>
-                    <c:if test="${not isFirst}">
-                        <li class="page-item">
-                            <a class="page-link"
-                               href="${contextPath}/login/profile?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
-                               tabindex="-1">Previous</a>
-                        </li>
-                    </c:if>
-                    <c:forEach begin="0" end="${numberOfPages-1}" var="pageNumber">
-                        <li class="page-item"><a class="page-link active"
-                                                 href="${contextPath}/login/profile?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a>
-                        </li>
-                        <span class="sr-only">(current)</span>
-                        </span>
-                    </c:forEach>
-                    <li class="page-item">
-                        <c:if test="${isLast}">
+</div>
+<div class="pages">
+    <c:if test="${not empty numberOfPages}">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <c:if test="${isFirst}">
                     <li class="page-item disabled">
-                        <a class="page-link">Next</a>
+                        <a class="page-link" tabindex="-1">Previous</a>
                     </li>
-                    </c:if>
-                    <c:if test="${not isLast}">
-                        <li class="page-item">
-                            <a class="page-link"
-                               href="${contextPath}/login/profile?pageNumber=${pageNumber+1}&pageSize=${pageSize}">
-                                Next</a>
-                        </li>
-                    </c:if>
-                </ul>
-            </nav>
-        </c:if>
-    </div>
+                </c:if>
+                <c:if test="${not isFirst}">
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
+                           tabindex="-1">Previous</a>
+                    </li>
+                </c:if>
+                <c:forEach begin="0" end="${numberOfPages-1}" var="pageNumber">
+                    <li class="page-item"><a class="page-link active"
+                                             href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a>
+                    </li>
+                    <span class="sr-only">(current)</span>
+                    </span>
+                </c:forEach>
+                <li class="page-item">
+                    <c:if test="${isLast}">
+                <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                </li>
+                </c:if>
+                <c:if test="${not isLast}">
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber+1}&pageSize=${pageSize}">
+                            Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+    </c:if>
 </div>
 <%@include file="/resources/footer.jsp" %>
 </body>
