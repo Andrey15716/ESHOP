@@ -16,6 +16,7 @@ public enum RequestParamsEnum {
     IS_FIRST_PAGE("isFirst"),
     IS_LAST_PAGE("isLast"),
     PAGE_NUMBER("pageNumber"),
+    PRODUCTS("products"),
     PAGE_SIZE("pageSize"),
     USER_ORDERS("userOrders"),
     ERROR_PARAM("error");
