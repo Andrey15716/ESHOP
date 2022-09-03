@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,13 +82,12 @@ public class CategoryServiceImpl<C> implements CategoryService {
     }
 
     @Override
-    public List<Category> saveCategoriesFromCsvFile(InputStream inputStream) {
+    public void saveCategoriesFromCsvFile(InputStream inputStream) {
         Assertions.assertNonNull(inputStream, CSV_PARSER_NOT_PROVIDED);
         List<Category> categoryParserCsv = CsvParser.categoryParserCsv(inputStream);
         if (Optional.ofNullable(categoryParserCsv).isPresent()) {
             categoryRepository.saveAll(categoryParserCsv);
             log.info("Category csv has been successfully saved");
         }
-        return Collections.emptyList();
     }
 }
