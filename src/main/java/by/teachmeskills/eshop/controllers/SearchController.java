@@ -1,8 +1,6 @@
 package by.teachmeskills.eshop.controllers;
 
 import by.teachmeskills.eshop.dto.SearchParamsDto;
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
-import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import by.teachmeskills.eshop.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +29,7 @@ public class SearchController {
     @PostMapping
     public ModelAndView getSearchPageResult(@ModelAttribute SearchParamsDto searchParamsDto,
                                             @RequestParam(defaultValue = "0") int pageNumber,
-                                            @RequestParam(defaultValue = "3") int pageSize) throws RepositoryExceptions, ServiceExceptions {
+                                            @RequestParam(defaultValue = "3") int pageSize) {
         return productService.getProductsBySearchRequest(searchParamsDto, pageNumber, pageSize);
     }
 }

@@ -2,8 +2,6 @@ package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.entities.Category;
 import by.teachmeskills.eshop.entities.Product;
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
-import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import by.teachmeskills.eshop.repositories.CategoryRepository;
 import by.teachmeskills.eshop.services.CategoryService;
 import by.teachmeskills.eshop.services.ProductService;
@@ -32,13 +30,13 @@ public class CategoryServiceImpl<C> implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final ProductService productService;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, ProductService productService, CsvParser csvUtil) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, ProductService productService) {
         this.categoryRepository = categoryRepository;
         this.productService = productService;
     }
 
     @Override
-    public Category create(Category entity) throws ServiceExceptions, RepositoryExceptions {
+    public Category create(Category entity) {
         return categoryRepository.save(entity);
     }
 
@@ -58,7 +56,7 @@ public class CategoryServiceImpl<C> implements CategoryService {
     }
 
     @Override
-    public ModelAndView getCategoryData(int id, int pageNumber, int pageSize) throws ServiceExceptions, RepositoryExceptions {
+    public ModelAndView getCategoryData(int id, int pageNumber, int pageSize) {
         ModelMap modelMap = new ModelMap();
         Category category = categoryRepository.getCategoryById(id);
         if (Optional.ofNullable(category).isPresent()) {
@@ -71,7 +69,7 @@ public class CategoryServiceImpl<C> implements CategoryService {
     }
 
     @Override
-    public void downloadCsvFile(Writer writer) throws RepositoryExceptions {
+    public void downloadCsvFile(Writer writer) {
         List<Category> categories = categoryRepository.findAll();
         try {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)

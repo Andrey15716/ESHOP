@@ -12,8 +12,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,10 +39,6 @@ public class User extends BaseEntity {
     @Column(name = "date_of_birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateBorn;
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
-//    @ManyToOne()
-//    @JoinColumn(name = "role_id")
-//    private Role role;
-
 }

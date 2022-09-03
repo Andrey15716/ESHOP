@@ -35,7 +35,7 @@ public class CategoryController {
     }
 
     @GetMapping("/download")
-    public void downloadCategoryCsv(HttpServletResponse response) throws IOException, RepositoryExceptions, ServiceExceptions {
+    public void downloadCategoryCsv(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         response.setCharacterEncoding("UTF8");
         response.addHeader("Content-Disposition", "attachment; filename=category.csv");

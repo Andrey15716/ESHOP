@@ -3,11 +3,11 @@ package by.teachmeskills.eshop.services;
 import by.teachmeskills.eshop.entities.Cart;
 import by.teachmeskills.eshop.entities.Order;
 import by.teachmeskills.eshop.entities.Product;
-import by.teachmeskills.eshop.entities.User;
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
 import by.teachmeskills.eshop.repositories.OrderRepository;
 import by.teachmeskills.eshop.repositories.ProductRepository;
 import by.teachmeskills.eshop.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDate;
 import java.util.List;
 
-import static by.teachmeskills.eshop.utils.EshopConstants.SHOPPING_CART;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.CART_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.ORDER_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.ORDER_ID_PARAM;
@@ -24,6 +23,7 @@ import static by.teachmeskills.eshop.utils.RequestParamsEnum.PRODUCT_PARAM;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.SHOPPING_CART_PARAM;
 
 @Service
+@Slf4j
 public class CartService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
@@ -36,16 +36,13 @@ public class CartService {
     }
 
     public ModelAndView getCartData(Cart cart) {
-//        if (Optional.ofNullable(user.getLogin()).isPresent()
-//                && Optional.ofNullable(user.getPassword()).isPresent()
-//                && Optional.ofNullable(user.getEmail()).isPresent()) {
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute(SHOPPING_CART_PARAM.getValue(), cart.getProducts());
         modelMap.addAttribute(PRICE_ORDER_PARAM.getValue(), cart.getTotalPrice());
         return new ModelAndView(CART_PAGE.getPath(), modelMap);
     }
 
-    public ModelAndView addProductToCart(int productId, Cart shopCart) throws RepositoryExceptions {
+    public ModelAndView addProductToCart(int productId, Cart shopCart) {
         ModelMap modelParams = new ModelMap();
         Product product = productRepository.getProductById(productId);
         shopCart.addProduct(product);
@@ -54,50 +51,24 @@ public class CartService {
         return new ModelAndView(CART_PAGE.getPath(), modelParams);
     }
 
-    public ModelAndView buyProduct(Cart shopCart, User user) throws RepositoryExceptions {
-        ModelMap modelMap = new ModelMap();
+    public ModelAndView buyProduct(Cart shopCart) {
         List<Product> products = shopCart.getProducts();
         int priceOrder = shopCart.getTotalPrice();
         LocalDate date = LocalDate.now();
-        User loggedInUser = userRepository.getUserByNameAndPassword(user.getName(), user.getPassword());
-        int userId = loggedInUser.getId();
-        user.setId(userId);
-        Order order = Order.builder().priceOrder(priceOrder).
-                date(date).
-                user(user).
-                productList(products).
-                build();
-        Order createdOrder = orderRepository.save(order);
-        modelMap.addAttribute(PRICE_ORDER_PARAM.getValue(), shopCart.getTotalPrice());
-        modelMap.addAttribute(ORDER_ID_PARAM.getValue(), createdOrder.getId());
-        shopCart.clearCart();
-        shopCart.setTotalPrice(0);
+        ModelMap modelMap = new ModelMap();
+        String loggedUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        userRepository.getUserByName(loggedUser).ifPresent(user -> {
+            Order createdOrder = orderRepository.save(Order.builder()
+                    .priceOrder(priceOrder)
+                    .date(date)
+                    .user(user)
+                    .productList(products)
+                    .build());
+            modelMap.addAttribute(PRICE_ORDER_PARAM.getValue(), shopCart.getTotalPrice());
+            modelMap.addAttribute(ORDER_ID_PARAM.getValue(), createdOrder.getId());
+            shopCart.clearCart();
+            log.info("Order " + createdOrder.getId() + " was created with user id + " + user.getId());
+        });
         return new ModelAndView(ORDER_PAGE.getPath(), modelMap);
     }
-
-//    public ModelAndView deleteProductFromCart(int productId, Cart shopCart) throws RepositoryExceptions {
-//        ModelMap modelMap = new ModelMap();
-//        Product product = productRepository.getProductById(productId);
-//        shopCart.deleteProduct(product);
-//        modelMap.addAttribute(SHOPPING_CART, shopCart);
-//        return new ModelAndView(ORDER_PAGE.getPath(), modelMap);
-//    }
-
-//    public ModelAndView increaseProductQuantity(int productId, Cart shopCart) throws RepositoryExceptions {
-//        ModelMap modelParams = new ModelMap();
-//        Product product = productRepository.getProductById(productId);
-//        shopCart.addProduct(product);
-//        modelParams.addAttribute(PRODUCT_PARAM.getValue(), product);
-//        modelParams.addAttribute(SHOPPING_CART, shopCart);
-//        return new ModelAndView(CART_PAGE.getPath(), modelParams);
-//    }
-//
-//    public ModelAndView decreaseProductQuantity(int productId, Cart shopCart) throws RepositoryExceptions {
-//        ModelMap modelParams = new ModelMap();
-//        Product product = productRepository.getProductById(productId);
-//        shopCart.decreaseQuantity(product);
-//        modelParams.addAttribute(PRODUCT_PARAM.getValue(), product);
-//        modelParams.addAttribute(SHOPPING_CART, shopCart);
-//        return new ModelAndView(CART_PAGE.getPath(), modelParams);
-//    }
 }

@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_ADMIN;
-import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_USER;
 
 @EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -30,10 +29,12 @@ public class WebSecurityConfig {
 
                                         .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/profile/**")
+                                        .antMatchers("/login/profile")
                                         .authenticated()
-                                        .antMatchers("/cart/**")
+                                        .antMatchers("/cart/buy")
                                         .authenticated()
+                                        .antMatchers("/home/admin")
+                                        .hasRole(ROLE_ADMIN)
                                         .and()
                                         .formLogin()
                                         .loginPage("/login")

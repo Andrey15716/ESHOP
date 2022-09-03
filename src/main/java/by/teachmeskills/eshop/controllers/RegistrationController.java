@@ -1,9 +1,6 @@
 package by.teachmeskills.eshop.controllers;
 
 import by.teachmeskills.eshop.entities.User;
-import by.teachmeskills.eshop.exceptions.RegistrationExceptions;
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
-import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import by.teachmeskills.eshop.services.UserService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +35,7 @@ public class RegistrationController {
 
     @PostMapping
     public ModelAndView login(@ModelAttribute(USER) @Valid User user,
-                              BindingResult bindingResult, ModelAndView modelAndView) throws RegistrationExceptions, ServiceExceptions, RepositoryExceptions {
+                              BindingResult bindingResult, ModelAndView modelAndView) {
         if (bindingResult.hasErrors()) {
             fieldError(NAME, modelAndView, bindingResult);
             fieldError(PASSWORD, modelAndView, bindingResult);
