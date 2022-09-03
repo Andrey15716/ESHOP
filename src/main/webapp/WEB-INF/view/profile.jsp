@@ -51,10 +51,10 @@
         <div class="card w-25 m-1">
             <div class="card-body">
                 <ul class="list-group-list-group-flush">
-                    <li class="list-group-item"><b>Имя:</b> <a>${loggedInUser.getName()}</a></li>
-                    <li class="list-group-item"><b>Фамилия:</b> <a>${loggedInUser.getSurname()}</a></li>
-                    <li class="list-group-item"><b>День рождения:</b> <a>${loggedInUser.getDateBorn()}</a></li>
-                    <li class="list-group-item"><b>ID пользователя:</b> <a>${loggedInUser.getId()}</a></li>
+                    <li class="list-group-item"><b>Имя:</b> <a>${loggedUser.getName()}</a></li>
+                    <%--                    <li class="list-group-item"><b>Фамилия:</b> <a>${loggedUser = SecurityContextHolder.getContext().getAuthentication().getSurname()}</a></li>--%>
+                    <%--                    <li class="list-group-item"><b>День рождения:</b> <a>${loggedUser = SecurityContextHolder.getContext().getAuthentication().getName()}</a></li>--%>
+                    <%--                    <li class="list-group-item"><b>ID пользователя:</b> <a>${loggedUser = SecurityContextHolder.getContext().getAuthentication().getId()}</a></li>--%>
                 </ul>
             </div>
         </div>

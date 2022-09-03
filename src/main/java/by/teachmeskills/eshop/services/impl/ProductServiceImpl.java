@@ -2,7 +2,6 @@ package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.dto.SearchParamsDto;
 import by.teachmeskills.eshop.entities.Product;
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
 import by.teachmeskills.eshop.repositories.ProductRepository;
 import by.teachmeskills.eshop.repositories.ProductSearchSpecification;
 import by.teachmeskills.eshop.services.ProductService;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ModelAndView getProductById(int id) throws RepositoryExceptions {
+    public ModelAndView getProductById(int id) {
         ModelMap modelMap = new ModelMap();
         Product product = productRepository.getProductById(id);
         if (Optional.ofNullable(product).isPresent()) {
@@ -117,12 +115,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> saveProductsFromCsvFile(InputStream inputStream) {
+    public void saveProductsFromCsvFile(InputStream inputStream) {
         Assertions.assertNonNull(inputStream, "CSV parser not provided");
         List<Product> productsParserCsv = CsvParser.productsParserCsv(inputStream);
         if (Optional.ofNullable(productsParserCsv).isPresent()) {
             productRepository.saveAll(productsParserCsv);
         }
-        return Collections.emptyList();
     }
 }

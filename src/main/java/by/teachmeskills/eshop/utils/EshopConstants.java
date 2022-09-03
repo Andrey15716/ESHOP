@@ -11,5 +11,4 @@ public interface EshopConstants {
     String FILE = "file";
     String ID = "id";
     String ROLE_ADMIN = "admin";
-    String ROLE_USER = "user";
 }

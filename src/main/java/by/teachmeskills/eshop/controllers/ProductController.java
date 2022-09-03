@@ -1,7 +1,5 @@
 package by.teachmeskills.eshop.controllers;
 
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
-import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import by.teachmeskills.eshop.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
+import static by.teachmeskills.eshop.utils.EshopConstants.FILE;
 
 @RestController
 @RequestMapping("/product")
@@ -25,12 +26,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView openProductPage(@PathVariable int id) throws ServiceExceptions, RepositoryExceptions {
+    public ModelAndView openProductPage(@PathVariable int id) {
         return productService.getProductById(id);
     }
 
     @GetMapping("/download")
-    public void downloadProductsCsv(HttpServletResponse response) throws IOException, RepositoryExceptions, ServiceExceptions {
+    public void downloadProductsCsv(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         response.setCharacterEncoding("UTF8");
         response.addHeader("Content-Disposition", "attachment; filename=product.csv");
@@ -38,7 +39,7 @@ public class ProductController {
     }
 
     @PostMapping("/upload")
-    public void uploadProductsCsv(@RequestParam("file") MultipartFile file) throws IOException {
+    public void uploadProductsCsv(@RequestParam(FILE) MultipartFile file) throws IOException {
         productService.saveProductsFromCsvFile(file.getInputStream());
     }
 }
