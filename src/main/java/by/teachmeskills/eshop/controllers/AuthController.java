@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import static by.teachmeskills.eshop.utils.EshopConstants.ATTACHMENT_FILE_NAME_ORDER_CSV;
+import static by.teachmeskills.eshop.utils.EshopConstants.CONTENT_DISPOSITION;
+import static by.teachmeskills.eshop.utils.EshopConstants.TEXT_CSV;
+import static by.teachmeskills.eshop.utils.EshopConstants.UTF8;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.SIGN_IN_PAGE;
 
 @RestController
@@ -31,13 +35,5 @@ public class AuthController {
     public ModelAndView getProfileData(@RequestParam(defaultValue = "0") int pageNumber,
                                        @RequestParam(defaultValue = "5") int pageSize) {
         return userService.getProfileAccount(pageNumber, pageSize);
-    }
-
-    @GetMapping("/order/download")
-    public void downloadOrderCsv(HttpServletResponse response, int userId) throws IOException {
-        response.setContentType("text/csv");
-        response.setCharacterEncoding("UTF8");
-        response.addHeader("Content-Disposition", "attachment; filename=order.csv");
-        userService.downloadOrderCsvFile(response.getWriter(), userId);
     }
 }

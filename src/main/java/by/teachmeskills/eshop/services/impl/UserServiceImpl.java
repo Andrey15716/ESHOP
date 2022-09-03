@@ -1,8 +1,10 @@
 package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.entities.Order;
+import by.teachmeskills.eshop.entities.Role;
 import by.teachmeskills.eshop.entities.User;
 import by.teachmeskills.eshop.repositories.OrderRepository;
+import by.teachmeskills.eshop.repositories.RoleRepository;
 import by.teachmeskills.eshop.repositories.UserRepository;
 import by.teachmeskills.eshop.services.UserService;
 import com.opencsv.CSVWriter;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ID;
+import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_USER;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.PROFILE_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_SUCCESS_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_FIRST_PAGE;
@@ -41,16 +44,22 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
-    public UserServiceImpl(UserRepository userRepository, OrderRepository orderRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, OrderRepository orderRepository,
+                           PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public User create(User entity) {
+        Role role = roleRepository.findRoleByName(ROLE_USER);
+        entity.setRole(role);
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        log.info("Password has been successfully encoded");
         return userRepository.save(entity);
     }
 
@@ -88,7 +97,7 @@ public class UserServiceImpl implements UserService {
         ModelMap modelMap = new ModelMap();
         String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
         userRepository.getUserByName(loggedInUser).ifPresent(user -> {
-            modelMap.addAttribute(LOGGED_IN_USER_PARAM.getValue(), loggedInUser);
+            modelMap.addAttribute(LOGGED_IN_USER_PARAM.getValue(), user);
             Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(ID).descending());
             Page<Order> userOrders = orderRepository.getOrdersByUserId(user.getId(), paging);
             modelMap.addAttribute(NUMBER_OF_PAGES.getValue(), userOrders.getTotalPages());

@@ -51,11 +51,10 @@
 
     <h2>Order Data pages control</h2>
     <div>
-        <label>Order download panel:</label>
         <div>
-            <a style="text-decoration: none"
-               href="${contextPath}/home/order/download?userId=${user.getId()}">
-                <button type="submit" class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
+            <p>Download all orders</p>
+            <a href="${contextPath}/home/download">
+                <button class="btn btn-primary" style="width: 100px; margin: 5px 0;">Download</button>
             </a>
         </div>
     </div>

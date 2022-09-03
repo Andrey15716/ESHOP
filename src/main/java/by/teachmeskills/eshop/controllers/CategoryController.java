@@ -1,7 +1,5 @@
 package by.teachmeskills.eshop.controllers;
 
-import by.teachmeskills.eshop.exceptions.RepositoryExceptions;
-import by.teachmeskills.eshop.exceptions.ServiceExceptions;
 import by.teachmeskills.eshop.services.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static by.teachmeskills.eshop.utils.EshopConstants.ATTACHMENT_FILE_NAME_CATEGORY_CSV;
+import static by.teachmeskills.eshop.utils.EshopConstants.CONTENT_DISPOSITION;
 import static by.teachmeskills.eshop.utils.EshopConstants.FILE;
+import static by.teachmeskills.eshop.utils.EshopConstants.TEXT_CSV;
+import static by.teachmeskills.eshop.utils.EshopConstants.UTF8;
 
 @RestController
 @RequestMapping("/category")
@@ -29,16 +31,15 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ModelAndView openCategoryPage(@PathVariable int id,
                                          @RequestParam(defaultValue = "0") int pageNumber,
-                                         @RequestParam(defaultValue = "10") int pageSize)
-            throws ServiceExceptions, RepositoryExceptions {
+                                         @RequestParam(defaultValue = "5") int pageSize) {
         return categoryService.getCategoryData(id, pageNumber, pageSize);
     }
 
     @GetMapping("/download")
     public void downloadCategoryCsv(HttpServletResponse response) throws IOException {
-        response.setContentType("text/csv");
-        response.setCharacterEncoding("UTF8");
-        response.addHeader("Content-Disposition", "attachment; filename=category.csv");
+        response.setContentType(TEXT_CSV);
+        response.setCharacterEncoding(UTF8);
+        response.addHeader(CONTENT_DISPOSITION, ATTACHMENT_FILE_NAME_CATEGORY_CSV);
         categoryService.downloadCsvFile(response.getWriter());
     }
 

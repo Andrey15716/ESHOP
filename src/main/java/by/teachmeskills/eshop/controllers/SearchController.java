@@ -29,7 +29,7 @@ public class SearchController {
     @PostMapping
     public ModelAndView getSearchPageResult(@ModelAttribute SearchParamsDto searchParamsDto,
                                             @RequestParam(defaultValue = "0") int pageNumber,
-                                            @RequestParam(defaultValue = "3") int pageSize) {
+                                            @RequestParam(defaultValue = "5") int pageSize) {
         return productService.getProductsBySearchRequest(searchParamsDto, pageNumber, pageSize);
     }
 }

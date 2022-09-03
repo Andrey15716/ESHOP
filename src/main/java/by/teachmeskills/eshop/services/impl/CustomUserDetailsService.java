@@ -2,7 +2,6 @@ package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.entities.User;
 import by.teachmeskills.eshop.repositories.UserRepository;
-import by.teachmeskills.eshop.utils.UserRoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,9 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserDetails userDetails;
         Optional<User> user = userRepository.getUserByName(username);
         if (user.isPresent()) {
+            User loggedInUser = user.get();
             Set<GrantedAuthority> roles = new HashSet<>();
-            roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
-            userDetails = new org.springframework.security.core.userdetails.User(user.get().getName(), user.get().getPassword(), roles);
+            roles.add(new SimpleGrantedAuthority(loggedInUser.getRole().getName()));
+            userDetails = new org.springframework.security.core.userdetails.User(loggedInUser.getName(), loggedInUser.getPassword(), roles);
         } else {
             throw new UsernameNotFoundException("User wasn't found");
         }

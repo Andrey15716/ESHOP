@@ -40,7 +40,7 @@ public class WebSecurityConfig {
                                         .loginPage("/login")
                                         .usernameParameter("name")
                                         .passwordParameter("password")
-                                        .defaultSuccessUrl("/home").failureUrl("/login?error")
+                                        .defaultSuccessUrl("/home")
                                         .permitAll()
                                         .and()
                                         .rememberMe()

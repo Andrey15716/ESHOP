@@ -24,6 +24,8 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Optional;
 
+import static by.teachmeskills.eshop.utils.EshopConstants.CSV_PARSER_NOT_PROVIDED;
+import static by.teachmeskills.eshop.utils.EshopConstants.NAME;
 import static by.teachmeskills.eshop.utils.EshopConstants.SEARCH_PARAM;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.PRODUCT_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.SEARCH_PAGE;
@@ -66,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProductsByCategoryId(int categoryId, int pageNumber, int pageSize) {
-        Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by("name").ascending());
+        Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(NAME).ascending());
         Page<Product> products = productRepository.findAllByCategoryId(categoryId, paging);
         log.info("Products has been found");
         return products.getContent();
@@ -76,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
     public ModelAndView getProductsBySearchRequest(SearchParamsDto searchParamsDto, int pageNumber, int pageSize) {
         ModelMap modelMap = new ModelMap();
         ProductSearchSpecification productSearchSpecification = new ProductSearchSpecification(searchParamsDto);
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name"));
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(NAME));
         Page<Product> productsPage = productRepository.findAll(productSearchSpecification, pageable);
         List<Product> productListResult = productRepository.findAll(productSearchSpecification);
         modelMap.addAttribute(SEARCH_RESULT_PARAM.getValue(), productListResult);
@@ -116,10 +118,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProductsFromCsvFile(InputStream inputStream) {
-        Assertions.assertNonNull(inputStream, "CSV parser not provided");
+        Assertions.assertNonNull(inputStream, CSV_PARSER_NOT_PROVIDED);
         List<Product> productsParserCsv = CsvParser.productsParserCsv(inputStream);
         if (Optional.ofNullable(productsParserCsv).isPresent()) {
             productRepository.saveAll(productsParserCsv);
+            log.info("Product csv has been saved");
         }
     }
 }

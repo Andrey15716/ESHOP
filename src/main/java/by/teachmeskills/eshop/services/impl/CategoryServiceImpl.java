@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static by.teachmeskills.eshop.utils.EshopConstants.CSV_PARSER_NOT_PROVIDED;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.CATEGORY_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.CATEGORY_PARAM;
 
@@ -83,10 +84,11 @@ public class CategoryServiceImpl<C> implements CategoryService {
 
     @Override
     public List<Category> saveCategoriesFromCsvFile(InputStream inputStream) {
-        Assertions.assertNonNull(inputStream, "CSV parser not provided");
+        Assertions.assertNonNull(inputStream, CSV_PARSER_NOT_PROVIDED);
         List<Category> categoryParserCsv = CsvParser.categoryParserCsv(inputStream);
         if (Optional.ofNullable(categoryParserCsv).isPresent()) {
             categoryRepository.saveAll(categoryParserCsv);
+            log.info("Category csv has been successfully saved");
         }
         return Collections.emptyList();
     }

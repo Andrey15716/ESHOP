@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import static by.teachmeskills.eshop.utils.EshopConstants.ATTACHMENT_FILE_NAME_PRODUCT_CSV;
+import static by.teachmeskills.eshop.utils.EshopConstants.CONTENT_DISPOSITION;
 import static by.teachmeskills.eshop.utils.EshopConstants.FILE;
+import static by.teachmeskills.eshop.utils.EshopConstants.TEXT_CSV;
+import static by.teachmeskills.eshop.utils.EshopConstants.UTF8;
 
 @RestController
 @RequestMapping("/product")
@@ -32,9 +36,9 @@ public class ProductController {
 
     @GetMapping("/download")
     public void downloadProductsCsv(HttpServletResponse response) throws IOException {
-        response.setContentType("text/csv");
-        response.setCharacterEncoding("UTF8");
-        response.addHeader("Content-Disposition", "attachment; filename=product.csv");
+        response.setContentType(TEXT_CSV);
+        response.setCharacterEncoding(UTF8);
+        response.addHeader(CONTENT_DISPOSITION, ATTACHMENT_FILE_NAME_PRODUCT_CSV);
         productService.downloadCsvFile(response.getWriter());
     }
 
