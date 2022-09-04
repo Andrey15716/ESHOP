@@ -1,0 +1,4 @@
+FROM openjdk:17-alpine
+ARG WAR_FILE
+COPY target/eshop-0.0.1-SNAPSHOT.war /eshop-0.0.1-SNAPSHOT.war
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-war","/Eshop_examination-0.0.1-SNAPSHOT.war","-web -webAllowOthers -tcp -tcpAllowOthers -browser"]
