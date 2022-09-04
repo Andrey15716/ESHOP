@@ -99,9 +99,6 @@ create table if not exists eshop2.order_product
     references eshop2.products(id)
     );
 
-
-
-
 #-----------------------------------------------------------
 --  DML for Table eshop2.roles
 #-----------------------------------------------------------
