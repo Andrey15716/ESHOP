@@ -35,6 +35,8 @@ public class WebSecurityConfig {
                                         .authenticated()
                                         .antMatchers("/home/admin")
                                         .hasRole(ROLE_ADMIN)
+                                        .antMatchers("/search")
+                                        .authenticated()
                                         .and()
                                         .formLogin()
                                         .loginPage("/login")
@@ -47,6 +49,7 @@ public class WebSecurityConfig {
                                         .alwaysRemember(true)
                                         .and()
                                         .logout()
+                                        .logoutUrl("/logout")
                                         .invalidateHttpSession(true)
                                         .clearAuthentication(true)
                                         .permitAll();

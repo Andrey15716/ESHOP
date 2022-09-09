@@ -3,21 +3,25 @@
 <html lang="en">
 <head>
     <title>Registration</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <%@include file="/resources/links.jsp" %>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/validation.js">
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div class="container">
     <div class="col-md-8 offset-md-4">
         <h2>Register</h2>
-        <form method="post" action="${contextPath}/registration" class="needs-validation"
-              novalidate>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="${contextPath}/home">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <form method="post" action="${contextPath}/registration" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="username">Login:</label>
                 <input type="text" class="form-control w-25" id="username" placeholder="Enter login" name="username"
@@ -65,7 +69,7 @@
                        required>
                 <div class="invalid-feedback">E-mail should be entered!</div>
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 90px; margin: 5px 0;">Register</button>
+            <button type="submit" class="btn btn-primary" style="width: 90px; margin: 5px 0;">Registration</button>
         </form>
     </div>
 </div>
@@ -73,10 +77,12 @@
     (function () {
         'use strict';
         window.addEventListener('load', function () {
+            // Get the forms we want to add validation styles to
             var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
-                    if (validateForm() === false || form.checkValidity() === false) {
+                    if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
                     }

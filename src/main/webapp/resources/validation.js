@@ -2,6 +2,7 @@ function validateForm() {
     var errorCounter = 0;
 
     errorCounter += validateName();
+    errorCounter += validateUserName();
     errorCounter += validateSurname();
     errorCounter += validateEmail();
     errorCounter += validatePass();
@@ -19,6 +20,23 @@ function validateName() {
     var nameErr = document.getElementById("nameError");
 
     if (nameFld.value.length <= 0) {
+        nameFld.style.background = '#FF0000';
+        nameErr.style.display = "block";
+        nameErr.style.color = "#FF0000";
+        errorCounter++;
+    } else {
+        nameFld.style.background = '#90EE90';
+        nameErr.style.display = "none";
+    }
+    return errorCounter;
+}
+
+function validateUserName() {
+    var errorCounter = 0;
+    var nameFld = document.getElementById("username");
+    var nameErr = document.getElementById("usernameError");
+
+    if (nameFld.value.length <= 3) {
         nameFld.style.background = '#FF0000';
         nameErr.style.display = "block";
         nameErr.style.color = "#FF0000";

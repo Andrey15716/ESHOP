@@ -1,15 +1,15 @@
 package by.teachmeskills.eshop.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Setter
-@Getter
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Cart extends BaseEntity {
     private Map<Integer, Product> products;
     private int totalPrice;
@@ -26,6 +26,32 @@ public class Cart extends BaseEntity {
     public void addProduct(Product product) {
         products.put(product.getId(), product);
         totalPrice += product.getPrice();
+    }
+
+//    public void deleteProduct(Product product) {
+//        products.remove(product.getId(), product);
+//        totalPrice = totalPrice - product.getPrice();
+//    }
+
+    public void increaseProduct(Product product) {
+        products.put(product.getId(), product);
+        totalPrice += product.getPrice();
+    }
+
+    public void decreaseProduct(Product product) {
+        int quantity = products.size();
+        if (quantity > 1) {
+            products.remove(products.size() - 1);
+        } else {
+            products.remove(product.getId(), product);
+        }
+
+
+        totalPrice -= product.getPrice();
+    }
+
+    public int getQuantity(Product product) {
+        return products.size();
     }
 
     public void clearCart() {

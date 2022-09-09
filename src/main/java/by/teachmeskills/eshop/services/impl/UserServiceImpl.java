@@ -19,16 +19,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.io.Writer;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import static by.teachmeskills.eshop.utils.EshopConstants.ERROR;
 import static by.teachmeskills.eshop.utils.EshopConstants.ID;
+import static by.teachmeskills.eshop.utils.EshopConstants.LOGIN_ERROR;
+import static by.teachmeskills.eshop.utils.EshopConstants.PASSWORD_ERROR;
 import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_USER;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.PROFILE_PAGE;
+import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_SUCCESS_PAGE;
+import static by.teachmeskills.eshop.utils.PagesPathEnum.SIGN_IN_PAGE;
+import static by.teachmeskills.eshop.utils.RequestParamsEnum.ERROR_PARAM;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_FIRST_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_LAST_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.LOGGED_IN_USER_PARAM;
@@ -79,16 +89,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ModelAndView addNewUser(User user) {
+    public ModelAndView addNewUser(User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         ModelMap modelMap = new ModelMap();
         String username = user.getName();
-        modelMap.addAttribute(LOGIN_PARAM.getValue(), username);
-        modelAndView.addObject(modelMap);
-        create(user);
-        modelAndView.setViewName(REGISTRATION_SUCCESS_PAGE.getPath());
-        log.info("New user has been added!");
-        return modelAndView;
+        if (bindingResult.hasErrors() || !checkFieldsNotNull(user)) {
+            fieldError(LOGIN_ERROR, modelAndView, bindingResult);
+            fieldError(PASSWORD_ERROR, modelAndView, bindingResult);
+            modelAndView.setViewName(REGISTRATION_PAGE.getPath());
+            return modelAndView;
+        }
+        if (userRepository.getUserByName(username).isEmpty()) {
+            create(user);
+            log.info("New user has been added!");
+            modelMap.addAttribute(LOGIN_PARAM.getValue(), username);
+            modelAndView.setViewName(REGISTRATION_SUCCESS_PAGE.getPath());
+            return new ModelAndView(SIGN_IN_PAGE.getPath(), modelMap);
+        } else {
+            modelMap.addAttribute(ERROR_PARAM.getValue(), "Cant create account with login " + user.getName() + ", cause user with such login is allready exist!");
+            log.error("User with login " + user.getName() + " has already exist, can`t create account");
+        }
+        return new ModelAndView(REGISTRATION_PAGE.getPath(), modelMap);
+    }
+
+    public boolean checkFieldsNotNull(User user) {
+        return !user.getName().isEmpty() && !user.getPassword().isEmpty() && !user.getSurname().isEmpty() && user.getDateBorn() != null;
+    }
+
+    private void fieldError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors(field)) {
+            modelAndView.addObject(field + ERROR, Objects.requireNonNull(bindingResult.getFieldError(field))
+                    .getDefaultMessage());
+        }
     }
 
     @Override
@@ -96,20 +128,24 @@ public class UserServiceImpl implements UserService {
         ModelAndView modelAndView = new ModelAndView();
         ModelMap modelMap = new ModelMap();
         String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
-        userRepository.getUserByName(loggedInUser).ifPresent(user -> {
-            modelMap.addAttribute(LOGGED_IN_USER_PARAM.getValue(), user);
-            Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(ID).descending());
-            Page<Order> userOrders = orderRepository.getOrdersByUserId(user.getId(), paging);
-            modelMap.addAttribute(NUMBER_OF_PAGES.getValue(), userOrders.getTotalPages());
-            modelMap.addAttribute(USER_ORDERS.getValue(), userOrders.getContent());
-            modelMap.addAttribute(PAGE_SIZE.getValue(), pageSize);
-            modelMap.addAttribute(IS_FIRST_PAGE.getValue(), userOrders.isFirst());
-            modelMap.addAttribute(PAGE_NUMBER.getValue(), pageNumber);
-            modelMap.addAttribute(IS_LAST_PAGE.getValue(), userOrders.isLast());
-            modelAndView.setViewName(PROFILE_PAGE.getPath());
-            modelAndView.addAllObjects(modelMap);
-            log.info("Profile page has been selected");
-        });
+        try {
+            userRepository.getUserByName(loggedInUser).ifPresent(user -> {
+                modelMap.addAttribute(LOGGED_IN_USER_PARAM.getValue(), user);
+                Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(ID).descending());
+                Page<Order> userOrders = orderRepository.getOrdersByUserId(user.getId(), paging);
+                modelMap.addAttribute(NUMBER_OF_PAGES.getValue(), userOrders.getTotalPages());
+                modelMap.addAttribute(USER_ORDERS.getValue(), userOrders.getContent());
+                modelMap.addAttribute(PAGE_SIZE.getValue(), pageSize);
+                modelMap.addAttribute(IS_FIRST_PAGE.getValue(), userOrders.isFirst());
+                modelMap.addAttribute(PAGE_NUMBER.getValue(), pageNumber);
+                modelMap.addAttribute(IS_LAST_PAGE.getValue(), userOrders.isLast());
+                modelAndView.setViewName(PROFILE_PAGE.getPath());
+                modelAndView.addAllObjects(modelMap);
+                log.info("Profile page has been selected");
+            });
+        } catch (Exception e) {
+            log.error("Profile page is not present");
+        }
         return modelAndView;
     }
 

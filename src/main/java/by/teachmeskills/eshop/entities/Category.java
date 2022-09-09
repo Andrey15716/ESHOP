@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.CascadeType;
@@ -20,12 +21,15 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
+@ToString
 @Table(name = "categories")
 public class Category extends BaseEntity {
     @Column
     private String name;
     @Column(name = "image")
+    @ToString.Exclude
     private String imageName;
+    @ToString.Exclude
     @OneToMany(mappedBy = "category", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> productList;
 }

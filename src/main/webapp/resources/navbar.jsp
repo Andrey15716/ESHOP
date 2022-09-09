@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -12,11 +13,10 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
-                <sec:authorize access="isAuthenticated()">
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/logout">Logout</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li class="nav-item"><a class="nav-link" href="${contextPath}/home/admin">Admin</a></li>
                     </sec:authorize>
-                </sec:authorize>
             </ul>
         </div>
     </div>

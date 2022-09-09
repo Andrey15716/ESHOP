@@ -17,9 +17,7 @@
     <c:forEach items="${category.getProductList()}" var="categoryItem">
         <div class="card w-25 m-1" type="categoryItem">
             <div>
-                <p><a class="product"
-                      href="${contextPath}/product/${categoryItem.getId()}">${categoryItem.getName()}</a>
-                </p>
+                <p><a class="product" href="${contextPath}/product/${categoryItem.getId()}">${categoryItem.getName()}</a></p>
                 <div class="card-body">
                     <img class="card-img" style="width:150px;height:120px"
                          src="${contextPath}/images/${categoryItem.getImageName()}" alt="Product image">
@@ -31,7 +29,6 @@
             </div>
         </div>
     </c:forEach>
-
 </div>
 <div class="pages">
     <c:if test="${not empty numberOfPages}">
@@ -39,34 +36,28 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${isFirst}">
                     <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1">Previous</a>
-                    </li>
+                        <a class="page-link" tabindex="-1">Previous</a></li>
                 </c:if>
                 <c:if test="${not isFirst}">
                     <li class="page-item">
-                        <a class="page-link"
-                           href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
-                           tabindex="-1">Previous</a>
-                    </li>
+                        <a class="page-link" href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
+                           tabindex="-1">Previous</a></li>
                 </c:if>
                 <c:forEach begin="0" end="${numberOfPages-1}" var="pageNumber">
-                    <li class="page-item"><a class="page-link active"
-                                             href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a>
-                    </li>
-                    <span class="sr-only">(current)</span>
-                    </span>
+                <li class="page-item">
+                    <a class="page-link"
+                       href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a></li>
                 </c:forEach>
+                    <li class="page-item active">
+                    <a class="page-link" href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}
+                            <span class="sr-only">(current)</span></a></li>
                 <li class="page-item">
                     <c:if test="${isLast}">
-                <li class="page-item disabled">
-                    <a class="page-link">Next</a>
-                </li>
+                <li class="page-item disabled"><a class="page-link">Next</a></li>
                 </c:if>
                 <c:if test="${not isLast}">
                     <li class="page-item">
-                        <a class="page-link"
-                           href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber+1}&pageSize=${pageSize}">
-                            Next</a>
+                        <a class="page-link" href="${contextPath}/category/${category.getId()}?pageNumber=${pageNumber+1}&pageSize=${pageSize}">Next</a>
                     </li>
                 </c:if>
             </ul>

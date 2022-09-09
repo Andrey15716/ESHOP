@@ -9,6 +9,22 @@
         function orderCompletedMsg() {
             window.confirm("Ваш заказ был оформлен!");
         }
+
+        function clearCartCompletedMsg() {
+            window.confirm("Корзина очищена!");
+        }
+
+        function decreaseCompletedMsg() {
+            window.confirm("Уменьшено");
+        }
+
+        function addedCompletedMsg() {
+            window.confirm("Продукт добавлен!");
+        }
+
+        function deletedCompletedMsg() {
+            window.confirm("Продукт удален!");
+        }
     </script>
 </head>
 <body>
@@ -17,29 +33,59 @@
 <%@include file="/resources/navbar.jsp" %>
 
 <div class="container-fluid mb-4">
-    <c:forEach items="${sessionScope.cart.getProducts()}" var="product">
-        <div class="card w-25 m-1" type="product">
-            <div class="card-body">
-                <img class="card-img" style="width:45%;height:45%"
-                     src="${contextPath}/images/${product.getImageName()}" alt="Product image">
-                <div class="list-group list-group-flush">
-                    <li class="card-title"><b>Name:</b> <a>${product.getName()}</a></li>
-                    <li class="card-title"><b>Description:</b> <a>${product.getDescription()}</a></li>
-                    <li class="card-title"><b>Price:</b> <a>${product.getPrice()}</a></li>
-
-                </div>
+    <c:if test="${cart.getTotalPrice() ==0}">
+        <div class="m-4 flex-center">
+            <div class="alert alert-info alert-dismissible d-flex align-items-center fade show w-33">
+                <i class="bi-info-circle-fill"></i>
+                <strong class="mx-2">Info!</strong> Корзина пустая! Давайте добавим что нибудь :)
             </div>
         </div>
-    </c:forEach>
+    </c:if>
+
+    <c:if test="${cart.getTotalPrice() >0}">
+
+        <%--    <c:forEach items="${sessionScope.cart.getProducts()}" var="product">--%>
+        <c:forEach items="${cart.getProducts()}" var="product">
+            <div class="card w-25 m-1" type="product">
+                <div class="card-body">
+                    <img class="card-img" style="width:45%;height:45%"
+                         src="${contextPath}/images/${product.getImageName()}" alt="Product image">
+                    <div class="list-group list-group-flush">
+                        <li class="card-title"><b>Name:</b> <a>${product.getName()}</a></li>
+                        <li class="card-title"><b>Description:</b> <a>${product.getDescription()}</a></li>
+                        <li class="card-title"><b>Price:</b> <a>${product.getPrice()}</a></li>
+<%--                        <a href="${contextPath}/cart/delete?productId=${product.getId()}">--%>
+<%--                            <button type="submit" class="btn btn-primary btn-sm" onclick="deletedCompletedMsg()">Удалить--%>
+<%--                            </button>--%>
+<%--                        </a><br>--%>
+
+                        <div class="cart-amount">
+<%--                            <li class="card-title"><b>Quantity:</b> <a>${cart.getQuantity(product)}</a></li>--%>
+<%--                            <b>Quantity:</b> <a href="${cart.getQuantity(product)}"></a>--%>
+                            <a href="${contextPath}/cart/increase?productId=${product.getId()}">
+                                <button type="submit" class="btn btn-primary btn-sm" onclick="addedCompletedMsg()">Добавить товар</button>
+                                <i class="fa-solid fa-circle-plus fa-2x" style="color: #555555"></i>
+                            </a>
+                            <a href="${contextPath}/cart/decrease?productId=${product.getId()}">
+                                <button type="submit" class="btn btn-primary btn-sm" onclick="decreaseCompletedMsg()">Уменьшить</button>
+                                <i class="fa-solid fa-circle-minus fa-2x" style="color: #555555"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </c:if>
+
 </div>
-<c:if test="${empty cart.getProducts()}">
-    <h3><p class="text-center">В корзине нет товаров</p></h3>
-</c:if>
-<c:if test="${not empty cart.getProducts()}">
+<c:if test="${not empty cart.getProducts() && cart.getTotalPrice() !=0}">
     <div class="total-sum center">
         <b>Итого : ${cart.getTotalPrice()}</b>
         <a href="${contextPath}/cart/buy">
-            <button type="submit" class="btn btn-primary btn-sm" onclick="orderCompletedMsg()">Купить
+            <button type="submit" class="btn btn-primary btn-sm" onclick="orderCompletedMsg()">Купить</button>
+        </a><br><br>
+        <a href="${contextPath}/cart/clear">
+            <button type="submit" class="btn btn-primary btn-sm" onclick="clearCartCompletedMsg()">Очистить корзину
             </button>
         </a>
     </div>

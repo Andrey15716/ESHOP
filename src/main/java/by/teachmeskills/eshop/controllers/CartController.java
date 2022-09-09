@@ -39,6 +39,26 @@ public class CartController {
         return cartService.buyProduct(shopCart);
     }
 
+//    @GetMapping("/delete")
+//    public ModelAndView deleteProduct(@ModelAttribute(SHOPPING_CART) Cart shopCart, int productId) {
+//        return cartService.deleteProductFromCart(shopCart, productId);
+//    }
+
+    @GetMapping("/increase")
+    public ModelAndView increaseProduct(@ModelAttribute(SHOPPING_CART) Cart shopCart, int productId) {
+        return cartService.increaseProductInCart(shopCart, productId);
+    }
+
+    @GetMapping("/decrease")
+    public ModelAndView decreaseProduct(@ModelAttribute(SHOPPING_CART) Cart shopCart, int productId) {
+        return cartService.decreaseProductInCart(shopCart, productId);
+    }
+
+    @GetMapping("/clear")
+    public ModelAndView clearProducts(@ModelAttribute(SHOPPING_CART) Cart shopCart) {
+        return cartService.clearCart(shopCart);
+    }
+
     @ModelAttribute(SHOPPING_CART)
     public Cart shoppingCart() {
         return new Cart();
