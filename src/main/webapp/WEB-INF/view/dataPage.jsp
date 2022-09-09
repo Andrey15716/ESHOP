@@ -26,7 +26,6 @@
             </a>
         </div>
     </div>
-
     <h2>Product Data pages control</h2>
     <div>
         <div>
@@ -43,7 +42,6 @@
             </a>
         </div>
     </div>
-
     <h2>Order Data pages control</h2>
     <div>
         <div>

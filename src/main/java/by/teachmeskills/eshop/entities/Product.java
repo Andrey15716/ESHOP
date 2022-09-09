@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "products")
 public class Product extends BaseEntity {
     @ManyToOne(optional = false)
@@ -26,9 +28,11 @@ public class Product extends BaseEntity {
     @Column
     private String name;
     @Column
+    @ToString.Exclude
     private String description;
     @Column
     private int price;
     @Column(name = "image_name")
+    @ToString.Exclude
     private String imageName;
 }

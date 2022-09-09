@@ -4,6 +4,7 @@ import by.teachmeskills.eshop.dto.SearchParamsDto;
 import by.teachmeskills.eshop.services.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,10 +27,17 @@ public class SearchController {
         return new ModelAndView(SEARCH_PAGE.getPath());
     }
 
-    @PostMapping
+    @PostMapping()
     public ModelAndView getSearchPageResult(@ModelAttribute SearchParamsDto searchParamsDto,
                                             @RequestParam(defaultValue = "0") int pageNumber,
                                             @RequestParam(defaultValue = "5") int pageSize) {
         return productService.getProductsBySearchRequest(searchParamsDto, pageNumber, pageSize);
+    }
+
+    @GetMapping("/result")
+    public ModelAndView getResultPage(@ModelAttribute SearchParamsDto searchParamsDto,
+                                      @RequestParam(defaultValue = "0") int pageNumber,
+                                      @RequestParam(defaultValue = "3") int pageSize) {
+        return productService.getProductsBySearchRequest(searchParamsDto,pageNumber, pageSize);
     }
 }

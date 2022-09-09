@@ -9,6 +9,8 @@ public interface EshopConstants {
     String PASSWORD = "password";
     String ERROR = "error";
     String FILE = "file";
+    String LOGIN_ERROR = "loginError";
+    String PASSWORD_ERROR = "passwordError";
     String ID = "id";
     String ROLE_ADMIN = "ADMIN";
     String ROLE_USER = "ROLE_USER";
@@ -19,6 +21,8 @@ public interface EshopConstants {
     String ATTACHMENT_FILE_NAME_PRODUCT_CSV = "attachment; filename=product.csv";
     String ATTACHMENT_FILE_NAME_CATEGORY_CSV = "attachment; filename=category.csv";
     String PRICE = "price";
+    String MIN_PRICE = "minPrice";
+    String MAX_PRICE = "maxPrice";
     String CATEGORY = "category";
     String CODE = "%";
     String CSV_PARSER_NOT_PROVIDED = "CSV parser not provided";

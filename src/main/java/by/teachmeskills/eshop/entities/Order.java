@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
@@ -33,6 +35,7 @@ public class Order extends BaseEntity {
     @Column(name = "price")
     private int priceOrder;
     @ManyToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
     @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Product> productList;
