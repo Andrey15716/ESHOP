@@ -4,11 +4,6 @@
 <head>
     <title>Login form</title>
     <%@include file="/resources/links.jsp" %>
-    <style>
-        span.error {
-            color: red;
-        }
-    </style>
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>

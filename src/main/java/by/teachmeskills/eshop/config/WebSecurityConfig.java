@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_ADMIN;
 
@@ -29,21 +30,16 @@ public class WebSecurityConfig {
 
                                         .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/login/profile")
-                                        .authenticated()
-                                        .antMatchers("/cart/buy")
+                                        .antMatchers("/login/profile","/cart/buy","/search","/home")
                                         .authenticated()
                                         .antMatchers("/home/admin")
                                         .hasRole(ROLE_ADMIN)
-                                        .antMatchers("/search")
-                                        .authenticated()
                                         .and()
                                         .formLogin()
                                         .loginPage("/login")
                                         .usernameParameter("name")
                                         .passwordParameter("password")
                                         .defaultSuccessUrl("/home")
-                                        .permitAll()
                                         .and()
                                         .rememberMe()
                                         .alwaysRemember(true)
@@ -64,5 +60,10 @@ public class WebSecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
     }
 }

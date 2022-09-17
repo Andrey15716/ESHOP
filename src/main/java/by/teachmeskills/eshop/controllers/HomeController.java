@@ -26,12 +26,10 @@ import static by.teachmeskills.eshop.utils.RequestParamsEnum.CATEGORIES_PARAM;
 @RequestMapping("/home")
 public class HomeController {
     private final CategoryService categoryService;
-    private final UserService userService;
     private final OrderService orderService;
 
-    public HomeController(CategoryService categoryService, UserService userService, OrderService orderService) {
+    public HomeController(CategoryService categoryService, OrderService orderService) {
         this.categoryService = categoryService;
-        this.userService = userService;
         this.orderService = orderService;
     }
 

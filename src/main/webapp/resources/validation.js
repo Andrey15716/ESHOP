@@ -1,6 +1,5 @@
 function validateForm() {
     var errorCounter = 0;
-
     errorCounter += validateName();
     errorCounter += validateUserName();
     errorCounter += validateSurname();
@@ -8,10 +7,7 @@ function validateForm() {
     errorCounter += validatePass();
     errorCounter += validateRepeatPass();
     errorCounter += validateBrthday();
-
     return errorCounter <= 0;
-
-
 }
 
 function validateName() {
@@ -52,7 +48,6 @@ function validateSurname() {
     var errorCounter = 0;
     var surnameFld = document.getElementById("surname");
     var surnameErr = document.getElementById("surnameError");
-
     if (surnameFld.value.length <= 0) {
         surnameFld.style.background = '#FF0000';
         surnameErr.style.display = "block";
@@ -62,7 +57,6 @@ function validateSurname() {
         surnameFld.style.background = '#90EE90';
         surnameErr.style.display = "none";
     }
-
     return errorCounter;
 }
 
@@ -92,7 +86,6 @@ function validateEmail() {
             validationErr.style.display = "none";
         }
     }
-
     return errorCounter;
 }
 
@@ -110,7 +103,6 @@ function validatePass() {
         passFld.style.background = '#90EE90';
         passErr.style.display = "none";
     }
-
     return errorCounter;
 }
 
@@ -139,7 +131,6 @@ function validateRepeatPass() {
             matchingErr.style.display = "none";
         }
     }
-
     return errorCounter;
 }
 
@@ -163,6 +154,5 @@ function validateBrthday() {
         brthYearFld.style.background = '#90EE90';
         brthErr.style.display = "none";
     }
-
     return errorCounter;
 }

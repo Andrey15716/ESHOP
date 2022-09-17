@@ -1,6 +1,7 @@
 package by.teachmeskills.eshop.controllers;
 
 import by.teachmeskills.eshop.services.CategoryService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ATTACHMENT_FILE_NAME_CATEGORY_CSV;
@@ -20,6 +22,7 @@ import static by.teachmeskills.eshop.utils.EshopConstants.TEXT_CSV;
 import static by.teachmeskills.eshop.utils.EshopConstants.UTF8;
 
 @RestController
+@Validated
 @RequestMapping("/category")
 public class CategoryController {
     private final CategoryService categoryService;
@@ -29,7 +32,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView openCategoryPage(@PathVariable int id,
+    public ModelAndView openCategoryPage(@NotNull(message = "CategoryId should not be empty") @PathVariable int id,
                                          @RequestParam(defaultValue = "0") int pageNumber,
                                          @RequestParam(defaultValue = "5") int pageSize) {
         return categoryService.getCategoryData(id, pageNumber, pageSize);

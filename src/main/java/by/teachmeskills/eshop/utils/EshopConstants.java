@@ -7,9 +7,9 @@ public interface EshopConstants {
     String SEARCH_PARAM = "searchParams";
     String NAME = "name";
     String PASSWORD = "password";
-    String ERROR = "error";
+    String ERROR = "Error";
     String FILE = "file";
-    String LOGIN_ERROR = "loginError";
+    String LOGIN_ERROR = "nameError";
     String PASSWORD_ERROR = "passwordError";
     String ID = "id";
     String ROLE_ADMIN = "ADMIN";
@@ -26,5 +26,7 @@ public interface EshopConstants {
     String CATEGORY = "category";
     String CODE = "%";
     String CSV_PARSER_NOT_PROVIDED = "CSV parser not provided";
-
+    String NAME_FIELD = "name";
+    String SURNAME_FIELD = "surname";
+    String PASSWORD_FIELD = "password";
 }

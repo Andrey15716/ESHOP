@@ -15,15 +15,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.io.Writer;
 import java.util.List;
 import java.util.Objects;
@@ -31,9 +30,10 @@ import java.util.Optional;
 
 import static by.teachmeskills.eshop.utils.EshopConstants.ERROR;
 import static by.teachmeskills.eshop.utils.EshopConstants.ID;
-import static by.teachmeskills.eshop.utils.EshopConstants.LOGIN_ERROR;
-import static by.teachmeskills.eshop.utils.EshopConstants.PASSWORD_ERROR;
+import static by.teachmeskills.eshop.utils.EshopConstants.NAME_FIELD;
+import static by.teachmeskills.eshop.utils.EshopConstants.PASSWORD_FIELD;
 import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_USER;
+import static by.teachmeskills.eshop.utils.EshopConstants.SURNAME_FIELD;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.PROFILE_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_SUCCESS_PAGE;
@@ -89,13 +89,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ModelAndView addNewUser(User user, BindingResult bindingResult) {
+    public ModelAndView addNewUser(User user, BindingResult bindingResult) throws AuthenticationException {
         ModelAndView modelAndView = new ModelAndView();
         ModelMap modelMap = new ModelMap();
         String username = user.getName();
-        if (bindingResult.hasErrors() || !checkFieldsNotNull(user)) {
-            fieldError(LOGIN_ERROR, modelAndView, bindingResult);
-            fieldError(PASSWORD_ERROR, modelAndView, bindingResult);
+        if (bindingResult.hasErrors()) {
+            fieldError(NAME_FIELD, modelAndView, bindingResult);
+            fieldError(SURNAME_FIELD, modelAndView, bindingResult);
+            fieldError(PASSWORD_FIELD, modelAndView, bindingResult);
             modelAndView.setViewName(REGISTRATION_PAGE.getPath());
             return modelAndView;
         }
@@ -106,20 +107,18 @@ public class UserServiceImpl implements UserService {
             modelAndView.setViewName(REGISTRATION_SUCCESS_PAGE.getPath());
             return new ModelAndView(SIGN_IN_PAGE.getPath(), modelMap);
         } else {
-            modelMap.addAttribute(ERROR_PARAM.getValue(), "Cant create account with login " + user.getName() + ", cause user with such login is allready exist!");
+            modelMap.addAttribute(ERROR_PARAM.getValue(),
+                    "Can not create account with login " + user.getName());
             log.error("User with login " + user.getName() + " has already exist, can`t create account");
         }
         return new ModelAndView(REGISTRATION_PAGE.getPath(), modelMap);
     }
 
-    public boolean checkFieldsNotNull(User user) {
-        return !user.getName().isEmpty() && !user.getPassword().isEmpty() && !user.getSurname().isEmpty() && user.getDateBorn() != null;
-    }
-
     private void fieldError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors(field)) {
-            modelAndView.addObject(field + ERROR, Objects.requireNonNull(bindingResult.getFieldError(field))
-                    .getDefaultMessage());
+            modelAndView.addObject(field + ERROR,
+                    Objects.requireNonNull(bindingResult.getFieldError(field))
+                            .getDefaultMessage());
         }
     }
 

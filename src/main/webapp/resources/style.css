@@ -36,3 +36,7 @@
     box-shadow: none;
     font-size: 25px;
 }
+
+.error {
+    color: red;
+}
