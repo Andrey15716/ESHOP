@@ -1,6 +1,7 @@
 package by.teachmeskills.eshop.controllers;
 
 import by.teachmeskills.eshop.services.ProductService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 
 import java.io.IOException;
 
@@ -21,6 +23,7 @@ import static by.teachmeskills.eshop.utils.EshopConstants.TEXT_CSV;
 import static by.teachmeskills.eshop.utils.EshopConstants.UTF8;
 
 @RestController
+@Validated
 @RequestMapping("/product")
 public class ProductController {
     private final ProductService productService;
@@ -30,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView openProductPage(@PathVariable int id) {
+    public ModelAndView openProductPage(@NotNull(message = "ProductId should not be empty") @PathVariable int id) {
         return productService.getProductById(id);
     }
 

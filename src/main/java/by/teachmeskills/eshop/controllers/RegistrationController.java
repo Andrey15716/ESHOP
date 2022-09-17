@@ -30,7 +30,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public ModelAndView login(@Valid @ModelAttribute(USER) User user, BindingResult bindingResult) {
+    public ModelAndView registration(@ModelAttribute(USER) @Valid User user, BindingResult bindingResult) {
         return userService.addNewUser(user, bindingResult);
     }
 

@@ -10,10 +10,10 @@
 //
 //@Documented
 //@Constraint(validatedBy = PasswordValidator.class)
-//@Target( { ElementType.METHOD, ElementType.FIELD })
+//@Target({ElementType.METHOD, ElementType.FIELD})
 //@Retention(RetentionPolicy.RUNTIME)
 //public @interface PasswordConstraint {
-//    String message() default "Invalid password";
+//    String message() default "Password should not contain spaces and must be between 5 to 30 characters";
 //    Class<?>[] groups() default {};
 //    Class<? extends Payload>[] payload() default {};
 //}

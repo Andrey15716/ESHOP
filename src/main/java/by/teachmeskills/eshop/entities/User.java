@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,17 +33,16 @@ import java.util.List;
 @Table(name = "user")
 public class User extends BaseEntity {
     @Column
-    @Pattern(regexp = "\\S+", message = "Spaces are not allowed")
-    @NotEmpty(message = "Login must not be empty")
+    @NotEmpty(message = "Name must not be empty")
     @Size(min = 5, max = 30, message = "Name must be between 5 and 30 characters")
     private String name;
     @Column
-    @NotEmpty(message = "Login must not be empty")
+    @NotEmpty(message = "Surname must not be empty")
     @Size(min = 5, max = 30, message = "Surname must be between 5 and 30 characters")
     private String surname;
     @Column
     @ToString.Exclude
-    @NotEmpty
+    @Pattern(regexp = "\\S+", message = "Spaces are not allowed")
     @NotEmpty(message = "Password must not be empty")
     private String password;
     @Column(name = "date_of_birthday")

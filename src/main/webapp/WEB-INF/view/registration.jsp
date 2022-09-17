@@ -4,35 +4,35 @@
 <head>
     <title>Registration</title>
     <%@include file="/resources/links.jsp" %>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/validation.js">
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div class="container">
     <div class="col-md-8 offset-md-4">
-        <h2>Register</h2>
+        <h2>Registration</h2>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="${contextPath}/home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${contextPath}/login">Login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
         <form method="post" action="${contextPath}/registration" class="needs-validation" novalidate>
             <div class="form-group">
-                <label for="username">Login:</label>
+                <label for="name">Login:</label>
                 <input type="text" class="form-control w-25" id="username" placeholder="Enter login" name="username"
                        required>
                 <div class="invalid-feedback">Login should be entered!</div>
+                <span class="error">${nameError}</span>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="text" class="form-control w-25" id="password" placeholder="Enter password" name="password"
                        required>
                 <div class="invalid-feedback">Password should be entered!</div>
+                <span class="error">${passwordError}</span>
             </div>
             <div class="form-group">
                 <label for="confirmpassword">Confirm password:</label>
@@ -40,20 +40,23 @@
                        name="confirmpassword"
                        required>
                 <div class="invalid-feedback">You need to confirm password!</div>
+                <span class="error">${passwordError}</span>
             </div>
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="name" class="form-control w-25" id="name" placeholder="Enter name"
+                <input type="text" class="form-control w-25" id="name" placeholder="Enter name"
                        name="name"
                        required>
                 <div class="invalid-feedback">Name should be entered!</div>
+                <span class="error">${nameError}</span>
             </div>
             <div class="form-group">
                 <label for="surname">Surname:</label>
-                <input type="surname" class="form-control w-25" id="surname" placeholder="Enter surname"
+                <input type="text" class="form-control w-25" id="surname" placeholder="Enter surname"
                        name="surname"
                        required>
                 <div class="invalid-feedback">Surname should be entered!</div>
+                <span class="error">${surnameError}</span>
             </div>
             <div class="form-group">
                 <label for="dateBorn">Date born:</label>
@@ -62,14 +65,7 @@
                        required>
                 <div class="invalid-feedback">Birth date should be entered!</div>
             </div>
-            <div class="form-group">
-                <label for="email">E-mail:</label>
-                <input type="email" class="form-control w-25" id="email" placeholder="Enter your E-mail"
-                       name="email"
-                       required>
-                <div class="invalid-feedback">E-mail should be entered!</div>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 90px; margin: 5px 0;">Registration</button>
+            <button type="submit" class="btn btn-primary" style="width: 110px; margin: 5px 0;">Registration</button>
         </form>
     </div>
 </div>

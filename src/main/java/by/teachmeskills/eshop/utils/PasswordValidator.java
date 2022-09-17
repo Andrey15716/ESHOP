@@ -7,6 +7,6 @@
 //    @Override
 //    public boolean isValid(String contactField, ConstraintValidatorContext constraintValidatorContext) {
 //        return contactField != null && contactField.matches("\\S+")
-//                && (contactField.length() >= 6) && (contactField.length() < 30);
+//                && (contactField.length() >= 5) && (contactField.length() < 30);
 //    }
 //}
