@@ -3,7 +3,6 @@ package by.teachmeskills.eshop.controllers;
 import by.teachmeskills.eshop.entities.Category;
 import by.teachmeskills.eshop.services.CategoryService;
 import by.teachmeskills.eshop.services.OrderService;
-import by.teachmeskills.eshop.services.UserService;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -9,7 +9,6 @@ import by.teachmeskills.eshop.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,14 +71,6 @@ public class CartService {
         });
         return new ModelAndView(ORDER_PAGE.getPath(), modelMap);
     }
-
-//    public ModelAndView deleteProductFromCart(Cart shopCart, int productId) {
-//        ModelMap modelMap = new ModelMap();
-//        Product product = productRepository.getProductById(productId);
-//        shopCart.deleteProduct(product);
-//        modelMap.addAttribute(SHOPPING_CART_PARAM.getValue(), shopCart);
-//        return new ModelAndView(CART_PAGE.getPath(), modelMap);
-//    }
 
     public ModelAndView increaseProductInCart(Cart shopCart, int productId) {
         ModelMap modelMap = new ModelMap();

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
-         pageEncoding="US-ASCII" isErrorPage="true"%>
+         pageEncoding="US-ASCII"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,19 +36,6 @@
                 Registration
             </button>
         </a>
-
-
-<%--        <% if(response.getStatus() == 500){ %>--%>
-<%--        <font color="red">Error: <%=exception.getMessage() %></font><br>--%>
-<%--        <div class="m-4">--%>
-<%--            <c:if test="${(response.getStatus() == 401)}">--%>
-<%--                <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">--%>
-<%--                    <i class="bi-exclamation-octagon-fill"></i>--%>
-<%--                    <strong class="mx-2">Error!</strong> <%=exception.getMessage() %>--%>
-<%--                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>--%>
-<%--                </div>--%>
-<%--            </c:if>--%>
-<%--        </div>--%>
     </div>
 </div>
 <script>

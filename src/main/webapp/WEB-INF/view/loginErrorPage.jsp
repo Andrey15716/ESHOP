@@ -18,11 +18,9 @@
         <h2>${error}</h2>
         <p>User was not found</p>
         <a href="${contextPath}/login">
-            <button type="button" class="btn btn-danger">Try again...</button>
-        </a>
+            <button type="button" class="btn btn-danger">Try again...</button></a>
         <a href="${contextPath}/registration">
-            <button type="button" class="btn btn-danger">Or Register new User</button>
-        </a>
+            <button type="button" class="btn btn-danger">Or Register new User</button></a>
     </div>
 </div>
 </body>

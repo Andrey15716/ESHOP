@@ -50,7 +50,6 @@
                 </div>
             </div>
         </c:forEach>
-
         <div class="pages">
             <c:if test="${not empty numberOfPages}">
                 <nav aria-label="Page navigation">

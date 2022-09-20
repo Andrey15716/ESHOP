@@ -18,8 +18,7 @@
         <h2>${error}</h2>
         <p>This page is not available</p>
         <a href="${contextPath}/home">
-            <button type="button" class="btn btn-danger">Try again...</button>
-        </a>
+            <button type="button" class="btn btn-danger">Try again...</button></a>
     </div>
 </div>
 </body>

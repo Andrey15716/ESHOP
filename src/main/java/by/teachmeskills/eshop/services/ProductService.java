@@ -13,8 +13,6 @@ public interface ProductService extends BaseServices<Product> {
 
     ModelAndView getProductsBySearchRequest(SearchParamsDto searchParamsDto, int pageNumber, int pageSize);
 
-//    ModelAndView getSearchData(int pageNumber, int pageSize);
-
     ModelAndView getProductById(int id);
 
     void downloadCsvFile(Writer writer);

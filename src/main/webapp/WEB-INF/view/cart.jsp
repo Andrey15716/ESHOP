@@ -31,7 +31,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <h2>Корзина</h2>
 <%@include file="/resources/navbar.jsp" %>
-
 <div class="container-fluid mb-4">
     <c:if test="${cart.getTotalPrice() ==0}">
         <div class="m-4 flex-center">
@@ -41,10 +40,7 @@
             </div>
         </div>
     </c:if>
-
     <c:if test="${cart.getTotalPrice() >0}">
-
-        <%--    <c:forEach items="${sessionScope.cart.getProducts()}" var="product">--%>
         <c:forEach items="${cart.getProducts()}" var="product">
             <div class="card w-25 m-1" type="product">
                 <div class="card-body">
@@ -54,14 +50,7 @@
                         <li class="card-title"><b>Name:</b> <a>${product.getName()}</a></li>
                         <li class="card-title"><b>Description:</b> <a>${product.getDescription()}</a></li>
                         <li class="card-title"><b>Price:</b> <a>${product.getPrice()}</a></li>
-<%--                        <a href="${contextPath}/cart/delete?productId=${product.getId()}">--%>
-<%--                            <button type="submit" class="btn btn-primary btn-sm" onclick="deletedCompletedMsg()">Удалить--%>
-<%--                            </button>--%>
-<%--                        </a><br>--%>
-
-                        <div class="cart-amount">
-<%--                            <li class="card-title"><b>Quantity:</b> <a>${cart.getQuantity(product)}</a></li>--%>
-<%--                            <b>Quantity:</b> <a href="${cart.getQuantity(product)}"></a>--%>
+                    <div class="cart-amount">
                             <a href="${contextPath}/cart/increase?productId=${product.getId()}">
                                 <button type="submit" class="btn btn-primary btn-sm" onclick="addedCompletedMsg()">Добавить товар</button>
                                 <i class="fa-solid fa-circle-plus fa-2x" style="color: #555555"></i>
@@ -76,7 +65,6 @@
             </div>
         </c:forEach>
     </c:if>
-
 </div>
 <c:if test="${not empty cart.getProducts() && cart.getTotalPrice() !=0}">
     <div class="total-sum center">

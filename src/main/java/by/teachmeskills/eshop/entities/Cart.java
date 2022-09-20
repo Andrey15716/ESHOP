@@ -28,11 +28,6 @@ public class Cart extends BaseEntity {
         totalPrice += product.getPrice();
     }
 
-//    public void deleteProduct(Product product) {
-//        products.remove(product.getId(), product);
-//        totalPrice = totalPrice - product.getPrice();
-//    }
-
     public void increaseProduct(Product product) {
         products.put(product.getId(), product);
         totalPrice += product.getPrice();
@@ -48,10 +43,6 @@ public class Cart extends BaseEntity {
 
 
         totalPrice -= product.getPrice();
-    }
-
-    public int getQuantity(Product product) {
-        return products.size();
     }
 
     public void clearCart() {
