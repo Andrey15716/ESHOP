@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ErrorPage</title>
+    <title>LoginErrorPage</title>
     <%@include file="/resources/links.jsp" %>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/error_style.css">
@@ -16,9 +16,12 @@
             <h1>Oops!</h1>
         </div>
         <h2>${error}</h2>
-        <p>This page is not available</p>
-        <a href="${contextPath}/home">
+        <p>User was not found</p>
+        <a href="${contextPath}/login">
             <button type="button" class="btn btn-danger">Try again...</button>
+        </a>
+        <a href="${contextPath}/registration">
+            <button type="button" class="btn btn-danger">Or Register new User</button>
         </a>
     </div>
 </div>

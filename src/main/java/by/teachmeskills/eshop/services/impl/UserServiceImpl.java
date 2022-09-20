@@ -38,7 +38,6 @@ import static by.teachmeskills.eshop.utils.PagesPathEnum.PROFILE_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_SUCCESS_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.SIGN_IN_PAGE;
-import static by.teachmeskills.eshop.utils.RequestParamsEnum.ERROR_PARAM;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_FIRST_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_LAST_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.LOGGED_IN_USER_PARAM;
@@ -107,8 +106,6 @@ public class UserServiceImpl implements UserService {
             modelAndView.setViewName(REGISTRATION_SUCCESS_PAGE.getPath());
             return new ModelAndView(SIGN_IN_PAGE.getPath(), modelMap);
         } else {
-            modelMap.addAttribute(ERROR_PARAM.getValue(),
-                    "Can not create account with login " + user.getName());
             log.error("User with login " + user.getName() + " has already exist, can`t create account");
         }
         return new ModelAndView(REGISTRATION_PAGE.getPath(), modelMap);
@@ -143,7 +140,7 @@ public class UserServiceImpl implements UserService {
                 log.info("Profile page has been selected");
             });
         } catch (Exception e) {
-            log.error("Profile page is not present");
+            log.error("Profile page is not presented");
         }
         return modelAndView;
     }

@@ -1,8 +1,10 @@
 package by.teachmeskills.eshop.config;
 
+import by.teachmeskills.eshop.services.impl.CustomAuthenticationFailure;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +20,11 @@ import static by.teachmeskills.eshop.utils.EshopConstants.ROLE_ADMIN;
 @ComponentScan(basePackages = "by")
 @Configuration
 public class WebSecurityConfig {
+    private final CustomAuthenticationFailure customAuthenticationFailure;
+
+    public WebSecurityConfig(@Lazy CustomAuthenticationFailure customAuthenticationFailure) {
+        this.customAuthenticationFailure = customAuthenticationFailure;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -30,7 +37,7 @@ public class WebSecurityConfig {
 
                                         .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/login/profile","/cart/buy","/search","/home")
+                                        .antMatchers("/login/profile", "/cart/buy", "/search", "/home")
                                         .authenticated()
                                         .antMatchers("/home/admin")
                                         .hasRole(ROLE_ADMIN)
@@ -39,7 +46,9 @@ public class WebSecurityConfig {
                                         .loginPage("/login")
                                         .usernameParameter("name")
                                         .passwordParameter("password")
+                                        .failureHandler(customAuthenticationFailure)
                                         .defaultSuccessUrl("/home")
+                                        .permitAll()
                                         .and()
                                         .rememberMe()
                                         .alwaysRemember(true)
@@ -65,5 +74,10 @@ public class WebSecurityConfig {
     @Bean
     public MethodValidationPostProcessor methodValidationPostProcessor() {
         return new MethodValidationPostProcessor();
+    }
+
+    @Bean
+    public CustomAuthenticationFailure customAuthenticationFailure() {
+        return new CustomAuthenticationFailure();
     }
 }
