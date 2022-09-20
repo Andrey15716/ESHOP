@@ -1,5 +1,6 @@
 package by.teachmeskills.eshop.entities;
 
+import by.teachmeskills.eshop.utils.UserConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,7 @@ public class User extends BaseEntity {
     @Column
     @NotEmpty(message = "Name must not be empty")
     @Size(min = 5, max = 30, message = "Name must be between 5 and 30 characters")
+    @UserConstraint
     private String name;
     @Column
     @NotEmpty(message = "Surname must not be empty")

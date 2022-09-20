@@ -6,11 +6,8 @@ public interface EshopConstants {
     String PRODUCT_ID_PARAM = "product_id";
     String SEARCH_PARAM = "searchParams";
     String NAME = "name";
-    String PASSWORD = "password";
     String ERROR = "Error";
     String FILE = "file";
-    String LOGIN_ERROR = "nameError";
-    String PASSWORD_ERROR = "passwordError";
     String ID = "id";
     String ROLE_ADMIN = "ADMIN";
     String ROLE_USER = "ROLE_USER";

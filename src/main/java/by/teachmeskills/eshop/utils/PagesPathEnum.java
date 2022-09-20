@@ -13,6 +13,7 @@ public enum PagesPathEnum {
     ORDER_PAGE("orders"),
     REGISTRATION_SUCCESS_PAGE("registration_success"),
     DATA_PAGE("dataPage"),
+    LOGIN_ERROR_PAGE("loginErrorPage"),
     ERROR_PAGE("error");
 
     private final String path;

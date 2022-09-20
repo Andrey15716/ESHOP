@@ -2,6 +2,7 @@ package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.entities.User;
 import by.teachmeskills.eshop.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service("userDetailsService")
+@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
@@ -31,9 +33,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             roles.add(new SimpleGrantedAuthority(loggedInUser.getRole().getName()));
             userDetails = new org.springframework.security.core.userdetails.User(loggedInUser.getName(), loggedInUser.getPassword(), roles);
         } else {
+            log.info("User was not found");
             throw new UsernameNotFoundException("User wasn't found");
         }
-
         return userDetails;
     }
 }
