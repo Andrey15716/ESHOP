@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
@@ -16,11 +17,13 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @SuperBuilder
 @Getter
+@ToString
 @Setter
 @MappedSuperclass
 public class BaseEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ToString.Exclude
     protected int id;
 }

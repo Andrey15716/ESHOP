@@ -49,6 +49,10 @@ public class Cart extends BaseEntity {
         products.clear();
     }
 
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
     public Cart(int totalPrice) {
         this.totalPrice = totalPrice * quantity;
     }

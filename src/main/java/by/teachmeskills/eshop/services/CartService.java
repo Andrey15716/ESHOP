@@ -67,6 +67,7 @@ public class CartService {
             modelMap.addAttribute(PRICE_ORDER_PARAM.getValue(), shopCart.getTotalPrice());
             modelMap.addAttribute(ORDER_ID_PARAM.getValue(), createdOrder.getId());
             shopCart.clearCart();
+            shopCart.setTotalPrice(0);
             log.info("Order " + createdOrder.getId() + " was created with user id + " + user.getId());
         });
         return new ModelAndView(ORDER_PAGE.getPath(), modelMap);

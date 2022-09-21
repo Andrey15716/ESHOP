@@ -35,7 +35,6 @@ public class Order extends BaseEntity {
     @Column(name = "price")
     private int priceOrder;
     @ManyToMany(fetch = FetchType.EAGER)
-    @ToString.Exclude
     @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Product> productList;

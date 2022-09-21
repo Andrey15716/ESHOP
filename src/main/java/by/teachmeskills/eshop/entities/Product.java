@@ -18,8 +18,8 @@ import javax.persistence.Table;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @ToString
+@Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
     @ManyToOne(optional = false)

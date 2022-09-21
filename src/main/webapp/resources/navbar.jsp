@@ -14,6 +14,7 @@
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
                 <li class="nav-item"><a class="nav-link" href="${contextPath}/logout">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li class="nav-item"><a class="nav-link" href="${contextPath}/home/admin">Admin</a></li>
                     </sec:authorize>

@@ -40,7 +40,7 @@
             </div>
         </div>
     </c:if>
-    <c:if test="${cart.getTotalPrice() >0}">
+    <c:if test="${not empty cart.getProducts()}">
         <c:forEach items="${cart.getProducts()}" var="product">
             <div class="card w-25 m-1" type="product">
                 <div class="card-body">
@@ -50,13 +50,17 @@
                         <li class="card-title"><b>Name:</b> <a>${product.getName()}</a></li>
                         <li class="card-title"><b>Description:</b> <a>${product.getDescription()}</a></li>
                         <li class="card-title"><b>Price:</b> <a>${product.getPrice()}</a></li>
-                    <div class="cart-amount">
+                        <div class="cart-amount">
                             <a href="${contextPath}/cart/increase?productId=${product.getId()}">
-                                <button type="submit" class="btn btn-primary btn-sm" onclick="addedCompletedMsg()">Добавить товар</button>
+                                <button type="submit" class="btn btn-primary btn-sm" onclick="addedCompletedMsg()">
+                                    Добавить товар
+                                </button>
                                 <i class="fa-solid fa-circle-plus fa-2x" style="color: #555555"></i>
                             </a>
                             <a href="${contextPath}/cart/decrease?productId=${product.getId()}">
-                                <button type="submit" class="btn btn-primary btn-sm" onclick="decreaseCompletedMsg()">Уменьшить</button>
+                                <button type="submit" class="btn btn-primary btn-sm" onclick="decreaseCompletedMsg()">
+                                    Уменьшить
+                                </button>
                                 <i class="fa-solid fa-circle-minus fa-2x" style="color: #555555"></i>
                             </a>
                         </div>
@@ -66,7 +70,7 @@
         </c:forEach>
     </c:if>
 </div>
-<c:if test="${not empty cart.getProducts() && cart.getTotalPrice() !=0}">
+<c:if test="${not empty cart.getProducts()}">
     <div class="total-sum center">
         <b>Итого : ${cart.getTotalPrice()}</b>
         <a href="${contextPath}/cart/buy">
