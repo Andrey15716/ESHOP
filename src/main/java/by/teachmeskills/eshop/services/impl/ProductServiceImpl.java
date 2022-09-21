@@ -7,14 +7,12 @@ import by.teachmeskills.eshop.repositories.CategoryRepository;
 import by.teachmeskills.eshop.repositories.ProductRepository;
 import by.teachmeskills.eshop.repositories.ProductSearchSpecification;
 import by.teachmeskills.eshop.services.ProductService;
-import by.teachmeskills.eshop.services.UserService;
 import by.teachmeskills.eshop.utils.Assertions;
 import by.teachmeskills.eshop.utils.CsvParser;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -44,6 +42,7 @@ import static by.teachmeskills.eshop.utils.RequestParamsEnum.PAGE_NUMBER;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PAGE_SIZE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PRODUCT_PARAM;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.SEARCH_RESULT_PARAM;
+import static by.teachmeskills.eshop.utils.RequestParamsEnum.TOTAL_ELEMENTS;
 
 @Slf4j
 @Service
@@ -104,10 +103,9 @@ public class ProductServiceImpl implements ProductService {
         model.addAttribute(MAX_PRICE, getMaxPrice(allProductsBySearch, checkString(searchParamsDto.getMaxPrice())));
         model.addAttribute(SEARCH_PARAM, searchParamsDto);
         model.addAttribute(SEARCH_RESULT_PARAM.getValue(), requestProducts.getContent());
-        model.addAttribute("totalElements", requestProducts.getTotalElements());
+        model.addAttribute(TOTAL_ELEMENTS.getValue(), requestProducts.getTotalElements());
         return new ModelAndView(SEARCH_PAGE.getPath(), model);
     }
-
 
     private int getMinPrice(List<Product> products, int priceValue) {
         if (priceValue == 0) {
