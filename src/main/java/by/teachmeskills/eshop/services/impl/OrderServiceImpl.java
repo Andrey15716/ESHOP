@@ -1,7 +1,6 @@
 package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.entities.Order;
-import by.teachmeskills.eshop.entities.Product;
 import by.teachmeskills.eshop.repositories.OrderRepository;
 import by.teachmeskills.eshop.repositories.ProductRepository;
 import by.teachmeskills.eshop.services.OrderService;
@@ -12,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
