@@ -104,6 +104,7 @@ public class ProductServiceImpl implements ProductService {
         model.addAttribute(MAX_PRICE, getMaxPrice(allProductsBySearch, checkString(searchParamsDto.getMaxPrice())));
         model.addAttribute(SEARCH_PARAM, searchParamsDto);
         model.addAttribute(SEARCH_RESULT_PARAM.getValue(), requestProducts.getContent());
+        model.addAttribute("totalElements", requestProducts.getTotalElements());
         return new ModelAndView(SEARCH_PAGE.getPath(), model);
     }
 
