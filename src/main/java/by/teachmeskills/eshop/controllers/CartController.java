@@ -30,7 +30,6 @@ public class CartController {
 
     @GetMapping
     public ModelAndView openCartPage(@ModelAttribute(SHOPPING_CART) Cart cart) {
-//        return cartService.getCartData(cart);
         return new ModelAndView(CART_PAGE.getPath());
     }
 

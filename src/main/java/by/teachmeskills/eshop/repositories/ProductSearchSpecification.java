@@ -48,7 +48,6 @@ public class ProductSearchSpecification implements Specification<Product> {
             predicates.add(criteriaBuilder.and(criteriaBuilder.equal(productCategoryJoin.get(NAME),
                     searchParamsDto.getCategoryName())));
         }
-
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 }
