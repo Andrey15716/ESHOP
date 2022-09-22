@@ -2,7 +2,6 @@ package by.teachmeskills.eshop.services.impl;
 
 import by.teachmeskills.eshop.entities.Order;
 import by.teachmeskills.eshop.repositories.OrderRepository;
-import by.teachmeskills.eshop.repositories.ProductRepository;
 import by.teachmeskills.eshop.services.OrderService;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;

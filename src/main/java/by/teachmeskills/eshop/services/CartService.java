@@ -35,13 +35,6 @@ public class CartService {
         this.userRepository = userRepository;
     }
 
-    public ModelAndView getCartData(Cart cart) {
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute(SHOPPING_CART_PARAM.getValue(), cart.getProducts());
-        modelMap.addAttribute(PRICE_ORDER_PARAM.getValue(), cart.getTotalPrice());
-        return new ModelAndView(CART_PAGE.getPath(), modelMap);
-    }
-
     public ModelAndView addProductToCart(int productId, Cart shopCart) {
         ModelMap modelParams = new ModelMap();
         Product product = productRepository.getProductById(productId);
