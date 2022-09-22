@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 
                                         .antMatchers("/webapp/WEB-INF/**", "/")
                                         .permitAll()
-                                        .antMatchers("/login/profile", "/cart/buy", "/search", "/home", "/cart")
+                                        .antMatchers("/login/profile", "/cart/buy", "/search", "/home", "/cart", "/category/*","/product/*")
                                         .authenticated()
                                         .antMatchers("/home/admin")
                                         .hasRole(ROLE_ADMIN)

@@ -38,7 +38,7 @@
                 <div class="row order-list">
                     <c:forEach items="${userOrder.getProductList()}" var="products">
                         <div class="card-body order-product">
-                            <img class="card-img" style="width:30px;height:30px"
+                            <img class="card-img" style="width:50px;height:50px"
                                  src="${contextPath}/images/${products.getImageName()}" alt="Product image"/>
                             <ul class="list-group order-product-info">
                                 <li class="list-group-item"><b>Name:</b> <a>${products.getName()}</a></li>
@@ -56,34 +56,28 @@
                     <ul class="pagination justify-content-center">
                         <c:if test="${isFirst}">
                             <li class="page-item disabled">
-                                <a class="page-link" tabindex="-1">Previous</a>
-                            </li>
+                                <a class="page-link" tabindex="-1">Previous</a></li>
                         </c:if>
                         <c:if test="${not isFirst}">
                             <li class="page-item">
-                                <a class="page-link"
-                                   href="${contextPath}/login/profile?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
-                                   tabindex="-1">Previous</a>
-                            </li>
+                                <a class="page-link" href="${contextPath}/login/profile?pageNumber=${pageNumber-1}&pageSize=${pageSize}"
+                                   tabindex="-1">Previous</a></li>
                         </c:if>
                         <c:forEach begin="0" end="${numberOfPages-1}" var="pageNumber">
-                            <li class="page-item"><a class="page-link active"
-                                                     href="${contextPath}/login/profile?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a>
-                            </li>
-                            <span class="sr-only">(current)</span>
-                            </span>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="${contextPath}/login/profile?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}</a></li>
                         </c:forEach>
+                        <li class="page-item active">
+                            <a class="page-link" href="${contextPath}/login/profile?pageNumber=${pageNumber}&pageSize=${pageSize}">${pageNumber+1}
+                                <span class="sr-only">(current)</span></a></li>
                         <li class="page-item">
                             <c:if test="${isLast}">
-                        <li class="page-item disabled">
-                            <a class="page-link">Next</a>
-                        </li>
+                        <li class="page-item disabled"><a class="page-link">Next</a></li>
                         </c:if>
                         <c:if test="${not isLast}">
                             <li class="page-item">
-                                <a class="page-link"
-                                   href="${contextPath}/login/profile?pageNumber=${pageNumber+1}&pageSize=${pageSize}">
-                                    Next</a>
+                                <a class="page-link" href="${contextPath}/login/profile?pageNumber=${pageNumber+1}&pageSize=${pageSize}">Next</a>
                             </li>
                         </c:if>
                     </ul>

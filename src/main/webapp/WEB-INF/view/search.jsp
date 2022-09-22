@@ -56,10 +56,10 @@
         <h3><p class="text-center">Найденные товары</p></h3>
         <c:forEach items="${search_result}" var="product">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-1" style="background-color:white;">
+                <div class="card w-25 m-1">
+                <div class="col-lg-1" style="background-color:white;">
                         <a href="${contextPath}/product/${product.getId()}">
-                            <img class="card-img" style="width:50px;height:120px"
+                            <img class="card-img" style="width:150px;height:120px"
                                  src="${contextPath}/images/${product.getImageName()}" alt="Product images"></a>
                     </div>
                     <div class="col" style="background-color:white;">
