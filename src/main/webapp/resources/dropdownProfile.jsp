@@ -5,6 +5,7 @@
         <option value="${contextPath}/login/profile?pageNumber=0&pageSize=10">10</option>
         <option value="${contextPath}/login/profile?pageNumber=0&pageSize=15">15</option>
         <option value="${contextPath}/login/profile?pageNumber=0&pageSize=20">20</option>
+        <option value="${contextPath}/login/profile?pageNumber=0&pageSize=${totalElements}">Все</option>
     </select>
     ${pageSize}
 </div>

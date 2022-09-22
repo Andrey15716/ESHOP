@@ -37,7 +37,7 @@ import static by.teachmeskills.eshop.utils.EshopConstants.SURNAME_FIELD;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.PROFILE_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_PAGE;
 import static by.teachmeskills.eshop.utils.PagesPathEnum.REGISTRATION_SUCCESS_PAGE;
-import static by.teachmeskills.eshop.utils.PagesPathEnum.SIGN_IN_PAGE;
+import static by.teachmeskills.eshop.utils.RequestParamsEnum.ERROR_PARAM;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_FIRST_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.IS_LAST_PAGE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.LOGGED_IN_USER_PARAM;
@@ -45,6 +45,7 @@ import static by.teachmeskills.eshop.utils.RequestParamsEnum.LOGIN_PARAM;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.NUMBER_OF_PAGES;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PAGE_NUMBER;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PAGE_SIZE;
+import static by.teachmeskills.eshop.utils.RequestParamsEnum.TOTAL_ELEMENTS;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.USER_ORDERS;
 
 @Slf4j
@@ -103,9 +104,9 @@ public class UserServiceImpl implements UserService {
             create(user);
             log.info("New user has been added!");
             modelMap.addAttribute(LOGIN_PARAM.getValue(), username);
-            modelAndView.setViewName(REGISTRATION_SUCCESS_PAGE.getPath());
-            return new ModelAndView(SIGN_IN_PAGE.getPath(), modelMap);
+            return new ModelAndView(REGISTRATION_SUCCESS_PAGE.getPath(), modelMap);
         } else {
+            modelMap.addAttribute(ERROR_PARAM.getValue(), "This user with name " + user.getName() + " allready exist");
             log.error("User with login " + user.getName() + " has already exist, can`t create account");
         }
         return new ModelAndView(REGISTRATION_PAGE.getPath(), modelMap);
@@ -135,6 +136,7 @@ public class UserServiceImpl implements UserService {
                 modelMap.addAttribute(IS_FIRST_PAGE.getValue(), userOrders.isFirst());
                 modelMap.addAttribute(PAGE_NUMBER.getValue(), pageNumber);
                 modelMap.addAttribute(IS_LAST_PAGE.getValue(), userOrders.isLast());
+                modelMap.addAttribute(TOTAL_ELEMENTS.getValue(), userOrders.getTotalElements());
                 modelAndView.setViewName(PROFILE_PAGE.getPath());
                 modelAndView.addAllObjects(modelMap);
                 log.info("Profile page has been selected");

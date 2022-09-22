@@ -35,6 +35,7 @@ import static by.teachmeskills.eshop.utils.RequestParamsEnum.NUMBER_OF_PAGES;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PAGE_NUMBER;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PAGE_SIZE;
 import static by.teachmeskills.eshop.utils.RequestParamsEnum.PRODUCTS;
+import static by.teachmeskills.eshop.utils.RequestParamsEnum.TOTAL_ELEMENTS;
 
 @Slf4j
 @Service
@@ -84,6 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
         modelMap.addAttribute(NUMBER_OF_PAGES.getValue(), pageProducts.getTotalPages());
         modelMap.addAttribute(IS_FIRST_PAGE.getValue(), pageProducts.isFirst());
         modelMap.addAttribute(IS_LAST_PAGE.getValue(), pageProducts.isLast());
+        modelMap.addAttribute(TOTAL_ELEMENTS.getValue(), pageProducts.getTotalElements());
         return new ModelAndView(CATEGORY_PAGE.getPath(), modelMap);
     }
 

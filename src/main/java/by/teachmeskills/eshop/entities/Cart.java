@@ -40,8 +40,6 @@ public class Cart extends BaseEntity {
         } else {
             products.remove(product.getId(), product);
         }
-
-
         totalPrice -= product.getPrice();
     }
 

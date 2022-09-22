@@ -33,6 +33,7 @@
                     <option value="Washing machines">Washing machines</option>
                     <option value="Appliances">Appliances</option>
                     <option value="TV">TV</option>
+                    <option value="">Все</option>
                 </select>
                 <br>
                 <label for="minPrice"></label><input id="minPrice" type="number" min="0"

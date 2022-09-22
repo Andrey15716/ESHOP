@@ -44,6 +44,7 @@
                                 <li class="list-group-item"><b>Name:</b> <a>${products.getName()}</a></li>
                                 <li class="list-group-item"><b>Description:</b> <a>${products.getDescription()}</a></li>
                                 <li class="list-group-item"><b>Price:</b> <a>${products.getPrice()}</a></li>
+<%--                                <li class="list-group-item"><b>Quantity:</b> <a>${cart.getQuantity()}</a></li>--%>
                             </ul>
                         </div>
                     </c:forEach>
