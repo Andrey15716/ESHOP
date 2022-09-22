@@ -11,13 +11,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/logout">Logout</a></li>
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart">Cart</a></li>
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <li class="nav-item"><a class="nav-link" href="${contextPath}/home/admin">Admin</a></li>
-                    </sec:authorize>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile" style="color:#1bbde6">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/search" style="color:#1bbde6">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/logout" style="color:#1bbde6">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/cart" style="color:#1bbde6">Cart</a></li>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <li class="nav-item"><a class="nav-link" href="${contextPath}/home/admin" style="color:#1bbde6">Admin</a></li>
+                </sec:authorize>
             </ul>
         </div>
     </div>

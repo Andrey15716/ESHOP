@@ -7,18 +7,10 @@
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%@include file="/resources/registrationNavbar.jsp" %>
 <div class="container">
     <div class="col-md-8 offset-md-4">
         <h2>Registration</h2>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="${contextPath}/login">Login</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <form method="post" action="${contextPath}/registration" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="name">Login:</label>

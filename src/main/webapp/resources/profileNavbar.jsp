@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/style.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="${contextPath}/home">Online Shop</a>
@@ -9,8 +10,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile?pageNumber=${pageNumber+1}&pageSize=${pageSize}">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="${contextPath}/search">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/login/profile?pageNumber=${pageNumber+1}&pageSize=${pageSize}" style="color:#1bbde6">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="${contextPath}/search" style="color:#1bbde6">Search</a></li>
             </ul>
         </div>
     </div>
