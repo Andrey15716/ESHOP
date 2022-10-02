@@ -189,69 +189,166 @@ insert into eshop2.products (id, name, description, price, category_id, image_na
 values (17, 'Photo_2','В качестве новинки улучшенная камера',211,6,'photocanon.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
 values (18, 'Photo_3','Увеличенная емкость батареи',265,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (19, 'Photo_3','Увеличенная емкость батареи',233,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (20, 'Photo_3','Увеличенная емкость батареи',445,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (21, 'Photo_3','Увеличенная емкость батареи',1236,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (22, 'Photo_3','Увеличенная емкость батареи',665,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (23, 'Photo_3','Увеличенная емкость батареи',554,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (24, 'Photo_3','Увеличенная емкость батареи',555,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (25, 'Photo_3','Увеличенная емкость батареи',552,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (26, 'Photo_3','Увеличенная емкость батареи',443,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (27, 'Photo_3','Увеличенная емкость батареи',238,6,'photocanon.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (28, 'Photo_3','Увеличенная емкость батареи',776,6,'photocanon.jpg');
 
 #--Washing machines
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (19, 'SAMSUNG','Лучшая камера серии A',322,7,'washer_samsung.jpg');
+values (29, 'SAMSUNG','Лучшая камера серии A',322,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (20, 'LG','В качестве новинки улучшенная камера',211,7,'washer_samsung.jpg');
+values (30, 'LG','В качестве новинки улучшенная камера',211,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (21, 'PHILIPS','Увеличенный обьем',323,7,'washer_samsung.jpg');
+values (31, 'PHILIPS','Увеличенный обьем',323,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (22, 'ATLANT','Увеличенный обьем',435,7,'washer_samsung.jpg');
+values (32, 'ATLANT','Увеличенный обьем',435,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (23, 'CANDY','Увеличенный обьем',456,7,'washer_samsung.jpg');
+values (33, 'CANDY','Увеличенный обьем',456,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (24, 'INDESIT','Увеличенный обьем',556,7,'washer_samsung.jpg');
+values (34, 'INDESIT','Увеличенный обьем',556,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (25, 'BOSCH','Увеличенный обьем',453,7,'washer_samsung.jpg');
+values (35, 'BOSCH','Увеличенный обьем',453,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (26, 'CANDY','Увеличенный обьем',235,7,'washer_samsung.jpg');
+values (36, 'CANDY','Увеличенный обьем',235,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (27, 'SAMSUNG','Увеличенный обьем',357,7,'washer_samsung.jpg');
+values (37, 'SAMSUNG','Увеличенный обьем',357,7,'washer_samsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (28, 'SAMSUNG','Увеличенный обьем',354,7,'washer_samsung.jpg');
+values (38, 'SAMSUNG','Увеличенный обьем',354,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (39, 'SAMSUNG','Увеличенный обьем',445,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (40, 'SAMSUNG','Увеличенный обьем',456,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (41, 'SAMSUNG','Увеличенный обьем',433,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (42, 'SAMSUNG','Увеличенный обьем',1236,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (43, 'SAMSUNG','Увеличенный обьем',334,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (44, 'SAMSUNG','Увеличенный обьем',567,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (45, 'SAMSUNG','Увеличенный обьем',4456,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (46, 'SAMSUNG','Увеличенный обьем',332,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (47, 'SAMSUNG','Увеличенный обьем',776,7,'washer_samsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (48, 'SAMSUNG','Увеличенный обьем',445,7,'washer_samsung.jpg');
 
 #--Appliances
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (29, 'DEERMA','Лучшая камера серии A',232,8,'cleaner.jpg');
+values (49, 'DEERMA','Лучшая камера серии A',232,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (30, 'DEERMA','В качестве новинки улучшенная камера',211,8,'cleaner.jpg');
+values (50, 'DEERMA','В качестве новинки улучшенная камера',211,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (31, 'SAMSUNG','Увеличенный обьем',424,8,'cleaner.jpg');
+values (51, 'SAMSUNG','Увеличенный обьем',424,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (32, 'ELECTROLUX','Увеличенный обьем',245,8,'cleaner.jpg');
+values (52, 'ELECTROLUX','Увеличенный обьем',245,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (33, 'ELECTROLUX','Увеличенный обьем',353,8,'cleaner.jpg');
+values (53, 'ELECTROLUX','Увеличенный обьем',353,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (34, 'BOSCH','Увеличенный обьем',343,8,'cleaner.jpg');
+values (54, 'BOSCH','Увеличенный обьем',343,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (35, 'BOSCH','Увеличенный обьем',353,8,'cleaner.jpg');
+values (55, 'BOSCH','Увеличенный обьем',353,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (36, 'BOSCH','Увеличенный обьем',235,8,'cleaner.jpg');
+values (56, 'SAMSUNG','Увеличенный обьем',235,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (37, 'BOSCH','Увеличенный обьем',357,8,'cleaner.jpg');
+values (57, 'BOSCH','Увеличенный обьем',357,8,'cleaner.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (38, 'BOSCH','Увеличенный обьем',354,8,'cleaner.jpg');
+values (58, 'ELECTROLUX','Увеличенный обьем',354,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (59, 'BOSCH','Увеличенный обьем',435,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (60, 'SAMSUNG','Увеличенный обьем',556,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (61, 'SAMSUNG','Увеличенный обьем',789,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (62, 'BOSCH','Увеличенный обьем',765,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (63, 'BOSCH','Увеличенный обьем',445,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (64, 'SAMSUNG','Увеличенный обьем',445,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (65, 'BOSCH','Увеличенный обьем',1234,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (66, 'SAMSUNG','Увеличенный обьем',567,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (67, 'BOSCH','Увеличенный обьем',567,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (68, 'SAMSUNG','Увеличенный обьем',554,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (69, 'SAMSUNG','Увеличенный обьем',248,8,'cleaner.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (70, 'ELECTROLUX','Увеличенный обьем',248,8,'cleaner.jpg');
+
 
 #--TV
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (39, 'SAMSUNG','OLED экран',333,9,'tvsamsung.jpg');
+values (71, 'SAMSUNG','OLED экран',333,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (40, 'LG','OLED экран',353,9,'tvsamsung.jpg');
+values (72, 'LG','OLED экран',353,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (41, 'XIAOMI','OLED экран',232,9,'tvsamsung.jpg');
+values (73, 'XIAOMI','OLED экран',232,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (42, 'SAMSUNG','OLED экран',244,9,'tvsamsung.jpg');
+values (74, 'SAMSUNG','OLED экран',244,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (43, 'ARTEL','OLED экран',452,9,'tvsamsung.jpg');
+values (75, 'ARTEL','OLED экран',452,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (44, 'IFFALCON','OLED экран',225,9,'tvsamsung.jpg');
+values (76, 'IFFALCON','OLED экран',225,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (45, 'SKYLINE','OLED экран',456,9,'tvsamsung.jpg');
+values (77, 'SKYLINE','OLED экран',456,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (46, 'ARTEL','OLED экран',554,9,'tvsamsung.jpg');
+values (78, 'ARTEL','OLED экран',554,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (47, 'SAMSUNG','OLED экран',224,9,'tvsamsung.jpg');
+values (79, 'SAMSUNG','OLED экран',224,9,'tvsamsung.jpg');
 insert into eshop2.products (id, name, description, price, category_id, image_name)
-values (48, 'SAMSUNG','OLED экран',221,9,'tvsamsung.jpg');
+values (80, 'SAMSUNG','OLED экран',221,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (81, 'SAMSUNG','OLED экран',234,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (82, 'SONY','OLED экран',256,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (83, 'SAMSUNG','OLED экран',456,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (84, 'SAMSUNG','OLED экран',432,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (85, 'SAMSUNG','OLED экран',678,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (86, 'SONY','OLED экран',544,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (87, 'SAMSUNG','OLED экран',789,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (88, 'SONY','OLED экран',655,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (89, 'SAMSUNG','OLED экран',567,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (90, 'XIAOMI','OLED экран',543,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (91, 'SONY','OLED экран',455,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (92, 'XIAOMI','OLED экран',5432,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (93, 'SONY','OLED экран',2123,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (94, 'SONY','OLED экран',445,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (95, 'SAMSUNG','OLED экран',456,9,'tvsamsung.jpg');
+insert into eshop2.products (id, name, description, price, category_id, image_name)
+values (96, 'SONY','OLED экран',890,9,'tvsamsung.jpg');
